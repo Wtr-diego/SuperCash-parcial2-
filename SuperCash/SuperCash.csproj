@@ -52,6 +52,9 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\producto.cs" />
+    <Compile Include="Models\usuario.cs" />
+    <Compile Include="Models\ventas.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -80,7 +83,6 @@
     <Folder Include="Data\" />
     <Folder Include="Forms\" />
     <Folder Include="Helpers\" />
-    <Folder Include="Models\" />
     <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
