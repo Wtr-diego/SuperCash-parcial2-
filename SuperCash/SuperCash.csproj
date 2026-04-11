@@ -99,6 +99,7 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="Resources\EA2.ico" />
+    <Content Include="Resources\Logocarrito.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

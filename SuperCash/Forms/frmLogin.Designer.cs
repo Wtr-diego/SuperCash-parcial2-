@@ -28,6 +28,7 @@
 
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLogin));
             this.pnlFondo = new System.Windows.Forms.Panel();
             this.lblFooter = new System.Windows.Forms.Label();
             this.lblError = new System.Windows.Forms.Label();
@@ -62,7 +63,7 @@
             this.pnlFondo.Controls.Add(this.pbLogo);
             this.pnlFondo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlFondo.Location = new System.Drawing.Point(0, 0);
-            this.pnlFondo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlFondo.Margin = new System.Windows.Forms.Padding(4);
             this.pnlFondo.Name = "pnlFondo";
             this.pnlFondo.Size = new System.Drawing.Size(600, 677);
             this.pnlFondo.TabIndex = 0;
@@ -113,7 +114,7 @@
             this.btnIniciarSesion.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
             this.btnIniciarSesion.ForeColor = System.Drawing.Color.White;
             this.btnIniciarSesion.Location = new System.Drawing.Point(80, 455);
-            this.btnIniciarSesion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnIniciarSesion.Margin = new System.Windows.Forms.Padding(4);
             this.btnIniciarSesion.Name = "btnIniciarSesion";
             this.btnIniciarSesion.Size = new System.Drawing.Size(440, 49);
             this.btnIniciarSesion.TabIndex = 8;
@@ -125,7 +126,7 @@
             // 
             this.chkMostrarContrasena.Font = new System.Drawing.Font("Tahoma", 8F);
             this.chkMostrarContrasena.Location = new System.Drawing.Point(80, 406);
-            this.chkMostrarContrasena.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkMostrarContrasena.Margin = new System.Windows.Forms.Padding(4);
             this.chkMostrarContrasena.Name = "chkMostrarContrasena";
             this.chkMostrarContrasena.Size = new System.Drawing.Size(173, 31);
             this.chkMostrarContrasena.TabIndex = 7;
@@ -137,7 +138,7 @@
             // 
             this.txtContrasena.Font = new System.Drawing.Font("Tahoma", 10F);
             this.txtContrasena.Location = new System.Drawing.Point(80, 369);
-            this.txtContrasena.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtContrasena.Margin = new System.Windows.Forms.Padding(4);
             this.txtContrasena.Name = "txtContrasena";
             this.txtContrasena.Size = new System.Drawing.Size(439, 28);
             this.txtContrasena.TabIndex = 6;
@@ -161,7 +162,7 @@
             // 
             this.txtUsuario.Font = new System.Drawing.Font("Tahoma", 10F);
             this.txtUsuario.Location = new System.Drawing.Point(80, 289);
-            this.txtUsuario.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtUsuario.Margin = new System.Windows.Forms.Padding(4);
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(439, 28);
             this.txtUsuario.TabIndex = 4;
@@ -206,13 +207,16 @@
             // 
             // pbLogo
             // 
+            this.pbLogo.Image = ((System.Drawing.Image)(resources.GetObject("pbLogo.Image")));
+            this.pbLogo.ImageLocation = "";
             this.pbLogo.Location = new System.Drawing.Point(246, 32);
-            this.pbLogo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pbLogo.Margin = new System.Windows.Forms.Padding(4);
             this.pbLogo.Name = "pbLogo";
             this.pbLogo.Size = new System.Drawing.Size(107, 98);
             this.pbLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbLogo.TabIndex = 0;
             this.pbLogo.TabStop = false;
+            this.pbLogo.Click += new System.EventHandler(this.pbLogo_Click);
             // 
             // frmLogin
             // 
@@ -221,7 +225,7 @@
             this.ClientSize = new System.Drawing.Size(600, 677);
             this.Controls.Add(this.pnlFondo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmLogin";

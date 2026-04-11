@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using SuperCash.Models;  // ← IMPORTANTE: Agregar este using
 
 namespace SuperCash.Data
 {
@@ -40,6 +41,8 @@ namespace SuperCash.Data
                 Productos.Add(new Producto { Id = 1, Nombre = "Arroz", Categoria = "Granos", Precio = 2.50m, Cantidad = 50 });
                 Productos.Add(new Producto { Id = 2, Nombre = "Leche", Categoria = "Lácteos", Precio = 1.80m, Cantidad = 30 });
                 Productos.Add(new Producto { Id = 3, Nombre = "Pan", Categoria = "Panadería", Precio = 0.90m, Cantidad = 5 });
+                Productos.Add(new Producto { Id = 4, Nombre = "Coca Cola", Categoria = "Bebidas", Precio = 1.50m, Cantidad = 20 });
+                Productos.Add(new Producto { Id = 5, Nombre = "Jabón", Categoria = "Limpieza", Precio = 2.00m, Cantidad = 15 });
             }
         }
     }

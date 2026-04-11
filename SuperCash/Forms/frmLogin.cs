@@ -3,6 +3,7 @@ using System.Linq;
 using System.Drawing;
 using System.Windows.Forms;
 using SuperCash.Data;
+using SuperCash.Forms;
 
 namespace SuperCash.Forms
 {
@@ -94,6 +95,7 @@ namespace SuperCash.Forms
             string usuarioInput = txtUsuario.Text.Trim();
             string contrasenaInput = txtContrasena.Text;
 
+            // Validar campos
             if (usuarioInput == "correo@ejemplo.com" || string.IsNullOrWhiteSpace(usuarioInput))
             {
                 MessageBox.Show("Por favor, ingrese su usuario o correo electrónico", "Campo requerido",
@@ -110,8 +112,10 @@ namespace SuperCash.Forms
                 return;
             }
 
+            // Buscar usuario por email o nombre
             var usuario = DataStore.Usuarios.FirstOrDefault(u =>
-                (u.Email == usuarioInput || u.Nombre == usuarioInput || (u.Email != null && u.Email.Split('@')[0] == usuarioInput)) &&
+                (u.Email == usuarioInput || u.Nombre == usuarioInput ||
+                 (u.Email != null && u.Email.Split('@')[0] == usuarioInput)) &&
                 u.Contrasena == contrasenaInput);
 
             if (usuario != null)
@@ -123,11 +127,7 @@ namespace SuperCash.Forms
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
 
-                // TEMPORALMENTE: Mostramos mensaje en lugar de abrir otros formularios
-                MessageBox.Show($"Rol: {usuario.Rol} - Los demás formularios se crearán después",
-                    "Próximamente", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                /* DESCOMENTA CUANDO TENGAS CREADOS LOS FORMULARIOS:
+                // Redirigir según el rol
                 if (usuario.Rol == "Administrador")
                 {
                     frmAdmin admin = new frmAdmin();
@@ -138,8 +138,8 @@ namespace SuperCash.Forms
                     frmVendedor vendedor = new frmVendedor();
                     vendedor.Show();
                 }
-                this.Hide();
-                */
+
+                this.Hide(); // Ocultar el formulario de login
             }
             else
             {
@@ -210,6 +210,11 @@ namespace SuperCash.Forms
         private void txtContrasena_TextChanged(object sender, EventArgs e)
         {
             // Este evento se ejecuta cuando el texto cambia
+        }
+
+        private void pbLogo_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
