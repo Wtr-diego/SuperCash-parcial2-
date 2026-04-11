@@ -1,6 +1,6 @@
 ﻿namespace SuperCash.Forms
 {
-    partial class frmvendedor
+    partial class frmVendedor
     {
         /// <summary>
         /// Required designer variable.

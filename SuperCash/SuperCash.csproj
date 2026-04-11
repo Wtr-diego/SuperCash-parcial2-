@@ -59,11 +59,11 @@
     <Compile Include="Forms\frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\frmvendedor.cs">
+    <Compile Include="Forms\frmVendedor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmvendedor.Designer.cs">
-      <DependentUpon>frmvendedor.cs</DependentUpon>
+    <Compile Include="Forms\frmVendedor.Designer.cs">
+      <DependentUpon>frmVendedor.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\validaciones.cs" />
     <Compile Include="Models\producto.cs" />
@@ -71,6 +71,9 @@
     <Compile Include="Models\ventas.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

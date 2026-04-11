@@ -1,22 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using SuperCash.Data;
+using SuperCash.Forms;
 
 namespace SuperCash
 {
     internal static class Program
     {
-        /// <summary>
-        /// Punto de entrada principal para la aplicación.
-        /// </summary>
         [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+
+            // Inicializar datos de prueba
+            DataStore.InicializarDatos();
+
+            // Iniciar con el formulario de LOGIN (NO Form1)
+            Application.Run(new frmLogin());
         }
     }
 }

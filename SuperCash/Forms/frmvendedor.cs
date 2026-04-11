@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace SuperCash.Forms
 {
-    public partial class frmvendedor : Form
+    public partial class frmVendedor : Form
     {
-        public frmvendedor()
+        public frmVendedor()
         {
             InitializeComponent();
         }
