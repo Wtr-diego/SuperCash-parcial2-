@@ -86,5 +86,53 @@ namespace SuperCash.Helpers
             }
             return true;
         }
-    }
+
+		// Validar si un producto alcanzó el stock mínimo
+		public static bool EsStockBajo(int cantidadActual, int limiteMinimo = 5)
+		{
+			if (cantidadActual <= limiteMinimo)
+			{
+				MessageBox.Show($"¡Alerta de Inventario! El stock actual ({cantidadActual}) es bajo.", "Control de Stock",
+					MessageBoxButtons.OK, MessageBoxIcon.Information);
+				return true;
+			}
+			return false;
+		}
+
+		// Validar que el texto sea un número decimal válido
+		public static bool EsDecimalValido(string texto, out decimal resultado)
+		{
+			// TryParse intenta convertirlo. Si falla, devuelve false sin romper el programa.
+			if (!decimal.TryParse(texto, out resultado))
+			{
+				MessageBox.Show("Por favor, ingrese un monto válido (ejemplo: 10.50).", "Validación",
+					MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				return false;
+			}
+			return true;
+		}
+
+		// Validar que un campo tenga una longitud mínima
+		public static bool LongitudMinima(string texto, int minimo, string nombreCampo)
+		{
+			if (texto.Length < minimo)
+			{
+				MessageBox.Show($"El campo {nombreCampo} debe tener al menos {minimo} caracteres.", "Validación",
+					MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				return false;
+			}
+			return true;
+		}
+		// Limpiar todos los TextBox dentro de un formulario o panel
+		public static void LimpiarTextboxes(Control.ControlCollection controles)
+		{
+			foreach (Control ctrl in controles)
+			{
+				if (ctrl is TextBox)
+				{
+					((TextBox)ctrl).Clear();
+				}
+			}
+		}
+	}
 }
