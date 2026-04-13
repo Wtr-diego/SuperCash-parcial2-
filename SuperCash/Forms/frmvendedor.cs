@@ -263,6 +263,11 @@ namespace SuperCash.Forms
             if (nudCantidad.Value < 1)
                 nudCantidad.Value = 1;
         }
+
+        private void frmVendedor_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 
     public class ItemVenta

@@ -15,7 +15,6 @@
         private System.Windows.Forms.Button btnIniciarSesion;
         private System.Windows.Forms.LinkLabel lnkRecuperar;
         private System.Windows.Forms.Label lblError;
-        private System.Windows.Forms.Label lblFooter;
 
         protected override void Dispose(bool disposing)
         {
@@ -30,7 +29,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLogin));
             this.pnlFondo = new System.Windows.Forms.Panel();
-            this.lblFooter = new System.Windows.Forms.Label();
             this.lblError = new System.Windows.Forms.Label();
             this.lnkRecuperar = new System.Windows.Forms.LinkLabel();
             this.btnIniciarSesion = new System.Windows.Forms.Button();
@@ -49,7 +47,6 @@
             // pnlFondo
             // 
             this.pnlFondo.BackColor = System.Drawing.Color.White;
-            this.pnlFondo.Controls.Add(this.lblFooter);
             this.pnlFondo.Controls.Add(this.lblError);
             this.pnlFondo.Controls.Add(this.lnkRecuperar);
             this.pnlFondo.Controls.Add(this.btnIniciarSesion);
@@ -67,31 +64,20 @@
             this.pnlFondo.Name = "pnlFondo";
             this.pnlFondo.Size = new System.Drawing.Size(600, 677);
             this.pnlFondo.TabIndex = 0;
-            // 
-            // lblFooter
-            // 
-            this.lblFooter.AutoSize = true;
-            this.lblFooter.Font = new System.Drawing.Font("Tahoma", 7F);
-            this.lblFooter.ForeColor = System.Drawing.Color.Gray;
-            this.lblFooter.Location = new System.Drawing.Point(80, 640);
-            this.lblFooter.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblFooter.Name = "lblFooter";
-            this.lblFooter.Size = new System.Drawing.Size(291, 14);
-            this.lblFooter.TabIndex = 11;
-            this.lblFooter.Text = "SuperCash © 2026 - Todos los derechos reservados";
-            this.lblFooter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.pnlFondo.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlFondo_Paint);
             // 
             // lblError
             // 
             this.lblError.Font = new System.Drawing.Font("Tahoma", 8F);
             this.lblError.ForeColor = System.Drawing.Color.Red;
-            this.lblError.Location = new System.Drawing.Point(80, 566);
+            this.lblError.Location = new System.Drawing.Point(77, 554);
             this.lblError.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblError.Name = "lblError";
             this.lblError.Size = new System.Drawing.Size(440, 37);
             this.lblError.TabIndex = 10;
             this.lblError.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblError.Visible = false;
+            this.lblError.Click += new System.EventHandler(this.lblError_Click);
             // 
             // lnkRecuperar
             // 
