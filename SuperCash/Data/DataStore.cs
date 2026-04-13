@@ -34,6 +34,16 @@ namespace SuperCash.Data
                     Contrasena = "vende123",
                     Rol = "Vendedor"
                 });
+
+                Usuarios.Add(new Usuario
+                {
+                    Id = 2,
+                    Nombre = "Diego",
+                    Apellido = "Martinez",
+                    Email = "diego@supercash.com",
+                    Contrasena = "diego123",
+                    Rol = "Vendedor"
+                });
             }
 
             if (Productos.Count == 0)
