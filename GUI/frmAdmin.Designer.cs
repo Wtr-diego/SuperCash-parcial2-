@@ -9,7 +9,7 @@
         private System.Windows.Forms.ComboBox cmbCategoria;
         private System.Windows.Forms.ComboBox cmbFiltroCategoria;
         private System.Windows.Forms.NumericUpDown nudPrecio;
-        private System.Windows.Forms.NumericUpDown nudCantidad;
+        private System.Windows.Forms.NumericUpDown nudStock; 
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Button btnNuevo;
         private System.Windows.Forms.Button btnEliminar;
@@ -37,7 +37,7 @@
             this.cmbCategoria = new System.Windows.Forms.ComboBox();
             this.cmbFiltroCategoria = new System.Windows.Forms.ComboBox();
             this.nudPrecio = new System.Windows.Forms.NumericUpDown();
-            this.nudCantidad = new System.Windows.Forms.NumericUpDown();
+            this.nudStock = new System.Windows.Forms.NumericUpDown();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.btnNuevo = new System.Windows.Forms.Button();
             this.btnEliminar = new System.Windows.Forms.Button();
@@ -49,7 +49,7 @@
             this.lblTotalProductos = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPrecio)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudCantidad)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudStock)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvProductos
@@ -109,11 +109,11 @@
             // 
             // nudCantidad
             // 
-            this.nudCantidad.Location = new System.Drawing.Point(12, 176);
-            this.nudCantidad.Maximum = new decimal(new int[] { 100000, 0, 0, 0 });
-            this.nudCantidad.Name = "nudCantidad";
-            this.nudCantidad.Size = new System.Drawing.Size(200, 20);
-            this.nudCantidad.TabIndex = 6;
+            this.nudStock.Location = new System.Drawing.Point(12, 176);
+            this.nudStock.Maximum = new decimal(new int[] { 100000, 0, 0, 0 });
+            this.nudStock.Name = "nudStock";
+            this.nudStock.Size = new System.Drawing.Size(200, 20);
+            this.nudStock.TabIndex = 6;
             // 
             // btnGuardar
             // 
@@ -227,7 +227,7 @@
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.btnNuevo);
             this.Controls.Add(this.btnGuardar);
-            this.Controls.Add(this.nudCantidad);
+            this.Controls.Add(this.nudStock);
             this.Controls.Add(this.nudPrecio);
             this.Controls.Add(this.cmbFiltroCategoria);
             this.Controls.Add(this.cmbCategoria);
@@ -239,7 +239,7 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPrecio)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudCantidad)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudStock)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
         }

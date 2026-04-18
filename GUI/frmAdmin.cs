@@ -57,11 +57,11 @@ namespace GUI
                 if (row.DataBoundItem != null)
                 {
                     var producto = (Producto)row.DataBoundItem;
-                    if (producto.Cantidad < 10)
+                    if (producto.Stock < 10)
                     {
                         row.DefaultCellStyle.BackColor = Color.LightCoral;
                     }
-                    else if (producto.Cantidad < 20)
+                    else if (producto.Stock < 20)
                     {
                         row.DefaultCellStyle.BackColor = Color.LightYellow;
                     }
@@ -99,7 +99,7 @@ namespace GUI
 
         private void VerificarStockBajo()
         {
-            var productosBajos = DataStore.Productos.Where(p => p.Cantidad < 10).ToList();
+            var productosBajos = DataStore.Productos.Where(p => p.Stock < 10).ToList();
 
             if (productosBajos.Any())
             {
@@ -107,7 +107,7 @@ namespace GUI
                 mensaje += "Los siguientes productos tienen menos de 10 unidades:\n\n";
                 foreach (var p in productosBajos)
                 {
-                    mensaje += $"• {p.Nombre}: {p.Cantidad} unidades\n";
+                    mensaje += $"• {p.Nombre}: {p.Stock} unidades\n";
                 }
                 MessageBox.Show(mensaje, "Inventario Bajo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -129,10 +129,10 @@ namespace GUI
                 return;
             }
 
-            if (nudCantidad.Value < 0)
+            if (nudStock.Value < 0)
             {
-                MessageBox.Show("La cantidad no puede ser negativa", "Valor inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                nudCantidad.Focus();
+                MessageBox.Show("El stock no puede ser negativo", "Valor inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                nudStock.Focus();
                 return;
             }
 
@@ -146,7 +146,7 @@ namespace GUI
                     Nombre = txtNombre.Text,
                     Categoria = cmbCategoria.SelectedItem.ToString(),
                     Precio = nudPrecio.Value,
-                    Cantidad = (int)nudCantidad.Value
+                    Stock = (int)nudStock.Value
                 };
 
                 DataStore.Productos.Add(nuevo);
@@ -157,7 +157,7 @@ namespace GUI
                 productoSeleccionado.Nombre = txtNombre.Text;
                 productoSeleccionado.Categoria = cmbCategoria.SelectedItem.ToString();
                 productoSeleccionado.Precio = nudPrecio.Value;
-                productoSeleccionado.Cantidad = (int)nudCantidad.Value;
+                productoSeleccionado.Stock = (int)nudStock.Value;
 
                 MessageBox.Show("Producto actualizado exitosamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -235,7 +235,7 @@ namespace GUI
                 txtNombre.Text = productoSeleccionado.Nombre;
                 cmbCategoria.SelectedItem = productoSeleccionado.Categoria;
                 nudPrecio.Value = productoSeleccionado.Precio;
-                nudCantidad.Value = productoSeleccionado.Cantidad;
+                nudStock.Value = productoSeleccionado.Stock;
             }
         }
 
@@ -244,7 +244,7 @@ namespace GUI
             txtNombre.Clear();
             cmbCategoria.SelectedIndex = 0;
             nudPrecio.Value = 0;
-            nudCantidad.Value = 0;
+            nudStock.Value = 0;
             productoSeleccionado = null;
         }
 
@@ -263,8 +263,8 @@ namespace GUI
 
         private void btnReporteStock_Click(object sender, EventArgs e)
         {
-            var productosBajos = DataStore.Productos.Where(p => p.Cantidad < 10).ToList();
-            var productosAgotados = DataStore.Productos.Where(p => p.Cantidad == 0).ToList();
+            var productosBajos = DataStore.Productos.Where(p => p.Stock < 10).ToList();
+            var productosAgotados = DataStore.Productos.Where(p => p.Stock == 0).ToList();
 
             string reporte = "📊 REPORTE DE INVENTARIO 📊\n\n";
             reporte += $"Total productos: {DataStore.Productos.Count}\n";
@@ -276,7 +276,7 @@ namespace GUI
                 reporte += "🔴 PRODUCTOS CON STOCK BAJO:\n";
                 foreach (var p in productosBajos)
                 {
-                    reporte += $"   • {p.Nombre}: {p.Cantidad} unidades\n";
+                    reporte += $"   • {p.Nombre}: {p.Stock} unidades\n";
                 }
             }
 

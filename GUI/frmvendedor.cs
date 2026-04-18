@@ -11,14 +11,15 @@ namespace GUI
 {
     public partial class frmVendedor : Form
     {
-        private List<ItemVenta> carrito = new List<ItemVenta>();
+		private const string V = "Precio";
+		private List<ItemVenta> carrito = new List<ItemVenta>();
         private int nextVentaId = 1;
 
         public frmVendedor()
         {
             InitializeComponent();
             ConfigurarFormulario();
-            CargarProductos();
+            CargarProductos(GetDgvProductos1());
             ActualizarCarrito();
         }
 
@@ -35,7 +36,12 @@ namespace GUI
             }
         }
 
-        private void CargarProductos(string filtro = "")
+		private DataGridView GetDgvProductos1()
+		{
+			return dgvProductos;
+		}
+
+		private void CargarProductos(DataGridView dgvProductos1, string filtro = "")
         {
             var productos = DataStore.Productos.AsEnumerable();
 
@@ -56,11 +62,11 @@ namespace GUI
                 dgvProductos.Columns["Nombre"].Width = 200;
                 dgvProductos.Columns["Categoria"].HeaderText = "Categoría";
                 dgvProductos.Columns["Categoria"].Width = 120;
-                dgvProductos.Columns["Precio"].HeaderText = "Precio";
+				dgvProductos.Columns["Precio"].HeaderText = V;
                 dgvProductos.Columns["Precio"].DefaultCellStyle.Format = "C2";
                 dgvProductos.Columns["Precio"].Width = 100;
-                dgvProductos.Columns["Cantidad"].HeaderText = "Stock";
-                dgvProductos.Columns["Cantidad"].Width = 80;
+				dgvProductos1.Columns["Stock"].HeaderText = "Stock";
+                dgvProductos.Columns["Stock"].Width = 80;
             }
 
             foreach (DataGridViewRow row in dgvProductos.Rows)
@@ -68,11 +74,11 @@ namespace GUI
                 if (row.DataBoundItem != null)
                 {
                     var producto = (Producto)row.DataBoundItem;
-                    if (producto.Cantidad == 0)
+                    if (producto.Stock == 0)
                     {
                         row.DefaultCellStyle.BackColor = Color.LightCoral;
                     }
-                    else if (producto.Cantidad < 10)
+                    else if (producto.Stock < 10)
                     {
                         row.DefaultCellStyle.BackColor = Color.LightYellow;
                     }
@@ -123,9 +129,9 @@ namespace GUI
                 return;
             }
 
-            if (cantidad > producto.Cantidad)
+            if (cantidad > producto.Stock)
             {
-                MessageBox.Show($"Stock insuficiente. Solo hay {producto.Cantidad} unidades", "Stock insuficiente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show($"Stock insuficiente. Solo hay {producto.Stock} unidades", "Stock insuficiente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -133,9 +139,9 @@ namespace GUI
 
             if (itemExistente != null)
             {
-                if (itemExistente.Cantidad + cantidad > producto.Cantidad)
+                if (itemExistente.Cantidad + cantidad > producto.Stock)
                 {
-                    MessageBox.Show($"No puede agregar más. Stock máximo: {producto.Cantidad}", "Límite alcanzado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show($"No puede agregar más. Stock máximo: {producto.Stock}", "Límite alcanzado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
                 itemExistente.Cantidad += cantidad;
@@ -186,7 +192,7 @@ namespace GUI
                 foreach (var item in carrito)
                 {
                     var producto = DataStore.Productos.First(p => p.Id == item.ProductoId);
-                    producto.Cantidad -= item.Cantidad;
+                    producto.Stock -= item.Cantidad;
 
                     DataStore.Ventas.Add(new Venta
                     {
@@ -204,7 +210,7 @@ namespace GUI
 
                 carrito.Clear();
                 ActualizarCarrito();
-                CargarProductos(txtBuscarProducto.Text);
+                CargarProductos(GetDgvProductos1(), txtBuscarProducto.Text);
 
                 MessageBox.Show("Venta completada exitosamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -237,13 +243,13 @@ namespace GUI
 
         private void btnBuscarProducto_Click(object sender, EventArgs e)
         {
-            CargarProductos(txtBuscarProducto.Text);
+            CargarProductos(GetDgvProductos1(), txtBuscarProducto.Text);
         }
 
         private void btnLimpiarBusqueda_Click(object sender, EventArgs e)
         {
             txtBuscarProducto.Clear();
-            CargarProductos();
+            CargarProductos(GetDgvProductos1());
         }
 
         private void btnCerrarSesion_Click(object sender, EventArgs e)
