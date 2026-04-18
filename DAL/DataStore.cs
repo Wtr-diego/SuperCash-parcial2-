@@ -38,7 +38,7 @@ namespace DAL
             {
                 Usuarios.Add(new Usuario
                 {
-                    Id = 1,
+                    Id = 3,
                     Nombre = "diego",
                     Apellido = "Martinez",
                     Email = "diego@supercash.com",
@@ -48,7 +48,7 @@ namespace DAL
 
                 Usuarios.Add(new Usuario
                 {
-                    Id = 2,
+                    Id = 4,
                     Nombre = "josue",
                     Apellido = "Salguero",
                     Email = "diego@supercash.com",
