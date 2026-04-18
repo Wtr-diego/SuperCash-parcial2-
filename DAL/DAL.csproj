@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CE1762F8-D7E9-4CDC-AB36-CEA5C67F6C3F}</ProjectGuid>
+    <ProjectGuid>{F6A0D68E-B51D-4D8F-BEA3-C6B1E98D6F51}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>SuperCash</RootNamespace>
-    <AssemblyName>SuperCash</AssemblyName>
+    <RootNamespace>DAL</RootNamespace>
+    <AssemblyName>DAL</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -46,55 +46,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\DataStore.cs" />
-    <Compile Include="Forms\forms\frmAdmin.cs">
+    <Compile Include="DataStore.cs" />
+    <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\forms\frmAdmin.Designer.cs">
-      <DependentUpon>frmAdmin.cs</DependentUpon>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\forms\frmLogin.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\forms\frmLogin.Designer.cs">
-      <DependentUpon>frmLogin.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\forms\frmvendedor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\forms\frmvendedor.Designer.cs">
-      <DependentUpon>frmvendedor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\frmAdmin.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\frmAdmin.Designer.cs">
-      <DependentUpon>frmAdmin.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\frmLogin.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\frmLogin.Designer.cs">
-      <DependentUpon>frmLogin.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\frmVendedor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\frmVendedor.Designer.cs">
-      <DependentUpon>frmVendedor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Helpers\validaciones.cs" />
-    <Compile Include="Models\producto.cs" />
-    <Compile Include="Models\usuario.cs" />
-    <Compile Include="Models\ventas.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Forms\forms\frmLogin.resx">
-      <DependentUpon>frmLogin.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmLogin.resx">
-      <DependentUpon>frmLogin.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -117,10 +77,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Content Include="Resources\EA2.ico" />
-    <Content Include="Resources\Logocarrito.jpg" />
+    <ProjectReference Include="..\EL\EL.csproj">
+      <Project>{caeffbd0-c140-429b-81a3-6406411e9db1}</Project>
+      <Name>EL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
