@@ -1,4 +1,5 @@
-﻿using System;
+// DAL\DataStore.cs (modificado: eliminado el bloque namespace EL con clases duplicadas)
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using EL;
@@ -69,4 +70,3 @@ namespace DAL
         }
     }
 }
-

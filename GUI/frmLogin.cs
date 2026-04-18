@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Linq;
-using System.Drawing;
 using System.Windows.Forms;
 using DAL;
 using EL;
-using BLL;
 
 namespace GUI
 {
@@ -13,25 +10,7 @@ namespace GUI
         public frmLogin()
         {
             InitializeComponent();
-            ConfigurarFormulario();
             ConfigurarPlaceholders();
-            CargarDatosPrueba();
-        }
-
-        private void ConfigurarFormulario()
-        {
-            this.Text = "SuperCash - Inicio de Sesión";
-            this.Size = new Size(450, 550);
-            this.StartPosition = FormStartPosition.CenterScreen;
-            this.FormBorderStyle = FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.BackColor = Color.White;
-        }
-
-        private void CargarDatosPrueba()
-        {
-            DataStore.InicializarDatos();
         }
 
         private void ConfigurarPlaceholders()
@@ -39,24 +18,133 @@ namespace GUI
             if (string.IsNullOrWhiteSpace(txtUsuario.Text))
             {
                 txtUsuario.Text = "correo@ejemplo.com";
-                txtUsuario.ForeColor = Color.Gray;
+                txtUsuario.ForeColor = System.Drawing.Color.Gray;
             }
 
             if (string.IsNullOrWhiteSpace(txtContrasena.Text))
             {
                 txtContrasena.Text = "Ingrese su contraseña";
-                txtContrasena.ForeColor = Color.Gray;
+                txtContrasena.ForeColor = System.Drawing.Color.Gray;
                 txtContrasena.PasswordChar = '\0';
-                txtContrasena.UseSystemPasswordChar = false;
             }
         }
 
+        // ============================================
+        // BOTÓN PROBAR CONEXIÓN (NUEVO)
+        // ============================================
+        private void btnProbarConexion_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Cambiar cursor a "espera" mientras prueba
+                Cursor = Cursors.WaitCursor;
+
+                // Probar conexión a la base de datos
+                if (DatabaseConnection.TestConnection())
+                {
+                    MessageBox.Show("✅ Conexión exitosa a la base de datos SuperCashDB\n\n" +
+                        "Servidor: DIEGO\\SQLEXPRESS\n" +
+                        "Base de datos: SuperCashDB",
+                        "Conexión Exitosa",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("❌ No se pudo conectar a la base de datos.\n\n" +
+                        "Verifique que:\n" +
+                        "1. SQL Server esté corriendo (Servicios → SQL Server)\n" +
+                        "2. La base de datos 'SuperCashDB' exista en SSMS\n" +
+                        "3. La cadena de conexión sea correcta\n\n" +
+                        "Cadena usada: Server=DIEGO\\SQLEXPRESS;Database=SuperCashDB;Integrated Security=True",
+                        "Error de Conexión",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error inesperado: " + ex.Message, "Excepción",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                // Restaurar cursor normal
+                Cursor = Cursors.Default;
+            }
+        }
+
+        // ============================================
+        // BOTÓN INICIAR SESIÓN
+        // ============================================
+        private void btnIniciarSesion_Click(object sender, EventArgs e)
+        {
+            string email = txtUsuario.Text.Trim();
+            string contrasena = txtContrasena.Text;
+
+            if (email == "correo@ejemplo.com" || string.IsNullOrWhiteSpace(email))
+            {
+                lblError.Text = "Ingrese su correo";
+                lblError.Visible = true;
+                return;
+            }
+
+            if (contrasena == "Ingrese su contraseña" || string.IsNullOrWhiteSpace(contrasena))
+            {
+                lblError.Text = "Ingrese su contraseña";
+                lblError.Visible = true;
+                return;
+            }
+
+            // Probar conexión y login
+            if (DatabaseConnection.TestConnection())
+            {
+                var repo = new UsuarioRepository();
+                var usuario = repo.Login(email, contrasena);
+
+                if (usuario != null)
+                {
+                    MessageBox.Show($"Bienvenido {usuario.Nombre} {usuario.Apellido}", "Éxito",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    // Guardar usuario actual en el DataStore (opcional) y abrir la interfaz correspondiente
+                    DAL.DataStore.UsuarioActual = usuario;
+
+                    if (usuario.Rol != null && usuario.Rol.Equals("Administrador", StringComparison.OrdinalIgnoreCase))
+                    {
+                        var adminForm = new frmAdmin();
+                        adminForm.Show();
+                    }
+                    else
+                    {
+                        var vendedorForm = new frmVendedor();
+                        vendedorForm.Show();
+                    }
+
+                    this.Hide();
+                }
+                else
+                {
+                    lblError.Text = "Usuario o contraseña incorrectos";
+                    lblError.Visible = true;
+                }
+            }
+            else
+            {
+                lblError.Text = "Error de conexión a la base de datos";
+                lblError.Visible = true;
+            }
+        }
+
+        // ============================================
+        // EVENTOS DE PLACEHOLDERS
+        // ============================================
         private void txtUsuario_Enter(object sender, EventArgs e)
         {
-            if (txtUsuario.Text == "correo@ejemplo.com" || txtUsuario.Text == "Ingrese su usuario")
+            if (txtUsuario.Text == "correo@ejemplo.com")
             {
                 txtUsuario.Text = "";
-                txtUsuario.ForeColor = Color.Black;
+                txtUsuario.ForeColor = System.Drawing.Color.Black;
             }
         }
 
@@ -65,7 +153,7 @@ namespace GUI
             if (string.IsNullOrWhiteSpace(txtUsuario.Text))
             {
                 txtUsuario.Text = "correo@ejemplo.com";
-                txtUsuario.ForeColor = Color.Gray;
+                txtUsuario.ForeColor = System.Drawing.Color.Gray;
             }
         }
 
@@ -74,9 +162,8 @@ namespace GUI
             if (txtContrasena.Text == "Ingrese su contraseña")
             {
                 txtContrasena.Text = "";
-                txtContrasena.ForeColor = Color.Black;
+                txtContrasena.ForeColor = System.Drawing.Color.Black;
                 txtContrasena.PasswordChar = '●';
-                txtContrasena.UseSystemPasswordChar = true;
             }
         }
 
@@ -85,134 +172,51 @@ namespace GUI
             if (string.IsNullOrWhiteSpace(txtContrasena.Text))
             {
                 txtContrasena.Text = "Ingrese su contraseña";
-                txtContrasena.ForeColor = Color.Gray;
+                txtContrasena.ForeColor = System.Drawing.Color.Gray;
                 txtContrasena.PasswordChar = '\0';
-                txtContrasena.UseSystemPasswordChar = false;
             }
         }
 
-        private void btnIniciarSesion_Click(object sender, EventArgs e)
+        // ============================================
+        // OTROS EVENTOS
+        // ============================================
+        private void chkMostrarContrasena_CheckedChanged(object sender, EventArgs e)
         {
-            string usuarioInput = txtUsuario.Text.Trim();
-            string contrasenaInput = txtContrasena.Text;
-
-            // Validar campos
-            if (usuarioInput == "correo@ejemplo.com" || string.IsNullOrWhiteSpace(usuarioInput))
-            {
-                MessageBox.Show("Por favor, ingrese su usuario o correo electrónico", "Campo requerido",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtUsuario.Focus();
-                return;
-            }
-
-            if (contrasenaInput == "Ingrese su contraseña" || string.IsNullOrWhiteSpace(contrasenaInput))
-            {
-                MessageBox.Show("Por favor, ingrese su contraseña", "Campo requerido",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtContrasena.Focus();
-                return;
-            }
-
-            // Buscar usuario por email o nombre
-            var usuario = DataStore.Usuarios.FirstOrDefault(u =>
-                (u.Email == usuarioInput || u.Nombre == usuarioInput ||
-                 (u.Email != null && u.Email.Split('@')[0] == usuarioInput)) &&
-                u.Contrasena == contrasenaInput);
-
-            if (usuario != null)
-            {
-                DataStore.UsuarioActual = usuario;
-
-                MessageBox.Show($"¡Bienvenido {usuario.Nombre} {usuario.Apellido}!\n\nRol: {usuario.Rol}",
-                    "Inicio de Sesión Exitoso",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
-
-                // Redirigir según el rol
-                if (usuario.Rol == "Administrador")
-                {
-                    frmAdmin admin = new frmAdmin();
-                    admin.Show();
-                }
-                else
-                {
-                    frmVendedor vendedor = new frmVendedor();
-                    vendedor.Show();
-                }
-
-                this.Hide(); // Ocultar el formulario de login
-            }
-            else
-            {
-                MessageBox.Show("Usuario o contraseña incorrectos", "Error de autenticación",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txtContrasena.Text = "";
-                txtContrasena.Focus();
-            }
+            txtContrasena.UseSystemPasswordChar = !chkMostrarContrasena.Checked;
         }
 
         private void lnkRecuperar_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            MessageBox.Show(
-                "Por favor, contacte al administrador para recuperar su contraseña.\n\n" +
-                "Email: admin@supercash.com",
-                "Recuperar Contraseña",
+            MessageBox.Show("Contacte al administrador: admin@supercash.com\n\n" +
+                "O llame al: 7777-8888",
+                "Recuperar contraseña",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
         }
 
-        private void txtUsuario_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (char)Keys.Enter)
-            {
-                txtContrasena.Focus();
-            }
-        }
-
-        private void txtContrasena_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (char)Keys.Enter)
-            {
-                btnIniciarSesion.PerformClick();
-            }
-        }
-
-        private void chkMostrarContrasena_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkMostrarContrasena.Checked)
-            {
-                txtContrasena.UseSystemPasswordChar = false;
-                txtContrasena.PasswordChar = '\0';
-            }
-            else
-            {
-                txtContrasena.UseSystemPasswordChar = true;
-                txtContrasena.PasswordChar = '●';
-            }
-        }
-
         private void frmLogin_FormClosing(object sender, FormClosingEventArgs e)
         {
-            DialogResult result = MessageBox.Show("¿Está seguro que desea salir de SuperCash?",
-                "Confirmar Salida",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
-
-            if (result == DialogResult.No)
-            {
-                e.Cancel = true;
-            }
-
+            Application.Exit();
         }
 
         private void txtContrasena_TextChanged(object sender, EventArgs e)
         {
-            // Este evento se ejecuta cuando el texto cambia
+            if (lblError.Visible) lblError.Visible = false;
+        }
+
+        private void txtUsuario_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter) txtContrasena.Focus();
+        }
+
+        private void txtContrasena_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter) btnIniciarSesion.PerformClick();
         }
 
         private void pbLogo_Click(object sender, EventArgs e)
         {
-
+            // Evento opcional para el logo
         }
     }
 }

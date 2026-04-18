@@ -1,12 +1,13 @@
 ﻿namespace EL
 {
-    // Esta entidad ya estaba creada anteriormente para las pruebas, solo se le hicieron unas pequeñas correcciones.
     public class Producto
     {
         public int Id { get; set; }
         public string Nombre { get; set; }
-        public string Categoria { get; set; }
+        public int CategoriaId { get; set; }  // Id numérico de categoría (opcional)
+        public string Categoria { get; set; } // Nombre de la categoría (usado por DAL.DataStore y consultas)
         public decimal Precio { get; set; }
-        public int Stock { get; set; } // Se modifica el nombre para no confundirlo con el de venta.
+        public int Stock { get; set; }  // ← Puede ser "Stock" o "Cantidad"
+        public int StockMinimo { get; set; }
     }
 }
