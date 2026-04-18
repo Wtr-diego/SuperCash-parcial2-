@@ -1,3 +1,7 @@
 <Solution>
+  <Project Path="BLL/BLL.csproj" Id="413da511-835a-4ce6-bf00-038dc8805db8" />
+  <Project Path="DAL/DAL.csproj" Id="f6a0d68e-b51d-4d8f-bea3-c6b1e98d6f51" />
+  <Project Path="EL/EL.csproj" Id="caeffbd0-c140-429b-81a3-6406411e9db1" />
+  <Project Path="GUI/GUI.csproj" Id="0fe42e06-f9b2-40bb-9d6d-4916a79e2cbb" />
   <Project Path="SuperCash/SuperCash.csproj" Id="ce1762f8-d7e9-4cdc-ab36-cea5c67f6c3f" />
 </Solution>
