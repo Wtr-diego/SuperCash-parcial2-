@@ -216,5 +216,15 @@ namespace SuperCash.Forms
         {
 
         }
+
+        private void lblError_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pnlFondo_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
