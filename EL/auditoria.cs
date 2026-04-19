@@ -11,3 +11,5 @@ namespace EL
         public string Detalle { get; set; }
     }
 }
+
+// se hicieron correciones por un error cuando se subio
