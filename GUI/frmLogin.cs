@@ -198,14 +198,11 @@ namespace GUI
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question);
 
-            if (result == DialogResult.Yes)
-            {
-                Application.Exit();
-            }
-            else
+            if (result == DialogResult.No)
             {
                 e.Cancel = true;
             }
+
         }
 
         private void txtContrasena_TextChanged(object sender, EventArgs e)
