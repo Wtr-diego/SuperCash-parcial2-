@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using EL;  // ← IMPORTANTE: Agregar este using
+using EL;
 
 namespace DAL
 {
@@ -35,6 +35,27 @@ namespace DAL
                     Rol = "Vendedor"
                 });
             }
+            {
+                Usuarios.Add(new Usuario
+                {
+                    Id = 3,
+                    Nombre = "diego",
+                    Apellido = "Martinez",
+                    Email = "diego@supercash.com",
+                    Contrasena = "diego123",
+                    Rol = "Administrador"
+                });
+
+                Usuarios.Add(new Usuario
+                {
+                    Id = 4,
+                    Nombre = "josue",
+                    Apellido = "Salguero",
+                    Email = "diego@supercash.com",
+                    Contrasena = "josue123",
+                    Rol = "Vendedor"
+                });
+            }
 
             if (Productos.Count == 0)
             {
@@ -47,3 +68,4 @@ namespace DAL
         }
     }
 }
+
