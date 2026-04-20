@@ -68,6 +68,7 @@
 			// 
 			// btnCerrarSesion
 			// 
+			this.btnCerrarSesion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnCerrarSesion.Location = new System.Drawing.Point(355, 10);
 			this.btnCerrarSesion.Margin = new System.Windows.Forms.Padding(4);
 			this.btnCerrarSesion.Name = "btnCerrarSesion";
