@@ -11,7 +11,7 @@
         private System.Windows.Forms.TextBox txtUsuario;
         private System.Windows.Forms.Label lblContrasena;
         private System.Windows.Forms.TextBox txtContrasena;
-        private System.Windows.Forms.CheckBox chkMostrarContrasena;
+		private System.Windows.Forms.CheckBox chkMostrarContrasena;
         private System.Windows.Forms.Button btnIniciarSesion;
         private System.Windows.Forms.LinkLabel lnkRecuperar;
         private System.Windows.Forms.Label lblError;
@@ -142,6 +142,7 @@
 			this.txtContrasena.Name = "txtContrasena";
 			this.txtContrasena.Size = new System.Drawing.Size(439, 28);
 			this.txtContrasena.TabIndex = 6;
+			this.txtContrasena.UseSystemPasswordChar = true;
 			this.txtContrasena.TextChanged += new System.EventHandler(this.txtContrasena_TextChanged);
 			this.txtContrasena.Enter += new System.EventHandler(this.txtContrasena_Enter);
 			this.txtContrasena.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtContrasena_KeyPress);

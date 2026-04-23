@@ -12,9 +12,6 @@ namespace GUI
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 
-			// Inicializar datos de prueba
-			DataStore.InicializarDatos();
-
 			// Iniciar con el formulario de LOGIN
 			Application.Run(new frmLogin());
 		}

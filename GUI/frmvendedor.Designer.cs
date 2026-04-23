@@ -1,4 +1,6 @@
-﻿namespace GUI
+﻿using System;
+
+namespace GUI
 {
     partial class frmVendedor
     {
@@ -109,7 +111,7 @@
             0,
             0,
             0});
-			this.nudCantidad.Click += new System.EventHandler(this.nudCantidad_ValueChanged);
+			this.nudCantidad.ValueChanged += new System.EventHandler(this.nudCantidad_ValueChanged);
 			// 
 			// lblCantidad
 			// 
@@ -311,6 +313,21 @@
 			this.ResumeLayout(false);
 
         }
+
+		private void nudCantidad_ValueChanged(object sender, EventArgs e)
+		{
+			throw new NotImplementedException();
+		}
+
+		private void btnLimpiarBusqueda_Click(object sender, EventArgs e)
+		{
+			throw new NotImplementedException();
+		}
+
+		private void btnQuitar_Click(object sender, EventArgs e)
+		{
+			throw new NotImplementedException();
+		}
 
 		private System.Windows.Forms.Label lblTotal;
 		private System.Windows.Forms.Button btnQuitar;
