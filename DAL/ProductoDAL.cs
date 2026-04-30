@@ -120,5 +120,22 @@ namespace DAL
 			}
 			return dt;
 		}
+
+		// Método para verificar si un producto ya existe en la base de datos
+		public bool ExisteProducto(string nombre)
+		{
+			using (SqlConnection con = conexion.ObtenerConexion())
+			{
+				string query = "SELECT COUNT(*) FROM Productos WHERE Nombre = @nombre";
+				SqlCommand cmd = new SqlCommand(query, con);
+				cmd.Parameters.AddWithValue("@nombre", nombre);
+
+				con.Open();
+
+				int conteo = Convert.ToInt32(cmd.ExecuteScalar());
+
+				return conteo > 0;
+			}
+		}
 	}
 }
