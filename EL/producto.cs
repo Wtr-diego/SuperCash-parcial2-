@@ -2,7 +2,7 @@
 {
     public class Producto
     {
-        public int Id { get; set; }
+        public int ID_Producto { get; set; }
         public string Nombre { get; set; }
         public int CategoriaId { get; set; }  // Id numérico de categoría (opcional)
         public string Categoria { get; set; } // Nombre de la categoría (usado por DAL.DataStore y consultas)

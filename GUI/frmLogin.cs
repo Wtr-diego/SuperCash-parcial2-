@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+<<<<<<< HEAD
 using DAL;
 using EL;
 
@@ -184,8 +185,130 @@ namespace GUI
         {
             txtContrasena.UseSystemPasswordChar = !chkMostrarContrasena.Checked;
         }
+=======
+using DAL; 
+using EL; 
+using BLL;
 
-        private void lnkRecuperar_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+namespace GUI
+{
+	public partial class frmLogin : Form
+	{
+		// Instancia de la capa de datos para validar usuarios
+		private UsuarioDAL userDAL = new UsuarioDAL();
+
+		public frmLogin()
+		{
+			InitializeComponent();
+			txtContrasena.UseSystemPasswordChar = true;
+			chkMostrarContrasena.Checked = false;
+			ConfigurarFormulario();
+			ConfigurarPlaceholders();
+		}
+
+		private void ConfigurarFormulario()
+		{
+			this.Text = "SuperCash - Inicio de Sesión";
+			this.Size = new Size(450, 550);
+			this.StartPosition = FormStartPosition.CenterScreen;
+			this.FormBorderStyle = FormBorderStyle.FixedSingle;
+			this.MaximizeBox = false;
+			this.MinimizeBox = false;
+			this.BackColor = Color.White;
+		}
+
+		private void ConfigurarPlaceholders()
+		{
+			if (string.IsNullOrWhiteSpace(txtUsuario.Text))
+			{
+				txtUsuario.Text = "";
+				txtUsuario.ForeColor = Color.Black;
+			}
+
+			if (string.IsNullOrWhiteSpace(txtContrasena.Text))
+			{
+				txtContrasena.Text = "";
+				txtContrasena.ForeColor = Color.Black;
+				txtContrasena.UseSystemPasswordChar = !chkMostrarContrasena.Checked;
+			}
+		}
+
+			private void txtContrasena_Leave(object sender, EventArgs e)
+		{
+			if (string.IsNullOrWhiteSpace(txtContrasena.Text))
+			{
+				txtContrasena.Text = "";
+				txtContrasena.ForeColor = Color.Black;
+
+				txtContrasena.UseSystemPasswordChar = false;
+			}
+		}
+
+		private void txtUsuario_Enter(object sender, EventArgs e) {}
+		private void txtUsuario_Leave(object sender, EventArgs e) {}
+		private void txtContrasena_Enter(object sender, EventArgs e) {}
+
+		private void btnIniciarSesion_Click(object sender, EventArgs e)
+		{
+			string usuarioInput = txtUsuario.Text.Trim();
+			string contrasenaInput = txtContrasena.Text;
+
+
+			if (usuarioInput == "correo@ejemplo.com" || string.IsNullOrWhiteSpace(usuarioInput))
+			{
+				MessageBox.Show("Por favor, ingrese su usuario o correo electrónico", "Campo requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				txtUsuario.Focus();
+				return;
+			}
+
+			if (contrasenaInput == "Ingrese su contraseña" || string.IsNullOrWhiteSpace(contrasenaInput))
+			{
+				MessageBox.Show("Por favor, ingrese su contraseña", "Campo requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				txtContrasena.Focus();
+				return;
+			}
+
+			try
+			{
+				var usuario = userDAL.ValidarUsuario(usuarioInput, contrasenaInput);
+
+				if (usuario != null)
+				{
+
+					EL.Sesion.UsuarioActual = usuario;
+
+					MessageBox.Show($"¡Bienvenido {usuario.Nombres} {usuario.Apellidos}!\n\nRol: {usuario.Rol}",
+						"Inicio de Sesión Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+>>>>>>> 21b8bb4b051c176eb666c7c7a6d1fcedbf3db64c
+
+					if (usuario.Rol == "Administrador" || usuario.ID_Rol == 1)
+					{
+						frmAdmin admin = new frmAdmin();
+						admin.Show();
+					}
+					else
+					{
+						frmVendedor vendedor = new frmVendedor();
+						vendedor.Show();
+					}
+
+					this.Hide();
+				}
+				else
+				{
+					MessageBox.Show("Usuario o contraseña incorrectos", "Error de autenticación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					txtContrasena.Clear();
+					txtContrasena.Focus();
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("Error de conexión a la base de datos: " + ex.Message);
+			}
+		}
+
+		private void lnkRecuperar_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             MessageBox.Show("Contacte al administrador: admin@supercash.com\n\n" +
                 "O llame al: 7777-8888",
@@ -194,6 +317,38 @@ namespace GUI
                 MessageBoxIcon.Information);
         }
 
+<<<<<<< HEAD
+=======
+        private void txtUsuario_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                txtContrasena.Focus();
+            }
+        }
+
+        private void txtContrasena_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                btnIniciarSesion.PerformClick();
+            }
+        }
+
+        private void chkMostrarContrasena_CheckedChanged(object sender, EventArgs e)
+        {
+			if (chkMostrarContrasena.Checked)
+			{
+				txtContrasena.PasswordChar = '\0';
+				txtContrasena.UseSystemPasswordChar = false;
+			}
+			else
+			{
+				txtContrasena.PasswordChar = '●';
+			}
+		}
+
+>>>>>>> 21b8bb4b051c176eb666c7c7a6d1fcedbf3db64c
         private void frmLogin_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
@@ -218,5 +373,12 @@ namespace GUI
         {
             // Evento opcional para el logo
         }
-    }
+
+		public void LimpiarCampos()
+		{
+			txtUsuario.Text = "";
+			txtContrasena.Text = "";
+			txtUsuario.Focus();
+		}
+	}
 }
