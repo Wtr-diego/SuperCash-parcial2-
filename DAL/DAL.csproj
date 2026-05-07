@@ -49,18 +49,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
-    <Compile Include="DatabaseConnection.cs" />
-    <Compile Include="DataStore.cs" />
-    <Compile Include="ProductoRepository.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UsuarioRepository.cs" />
-=======
     <Compile Include="ConexionDB.cs" />
     <Compile Include="ProductoDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UsuarioDAL.cs" />
->>>>>>> 21b8bb4b051c176eb666c7c7a6d1fcedbf3db64c
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

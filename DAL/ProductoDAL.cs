@@ -120,5 +120,27 @@ namespace DAL
 			}
 			return dt;
 		}
+
+		// Nuevo método: ReporteStockMenorAlerta
+		// Nota: actualmente los parámetros de fecha se ignoran porque la tabla Productos
+		// no contiene información temporal en el esquema proporcionado. Este método
+		// devuelve los productos con stock menor o igual a un umbral de alerta.
+		public DataTable ReporteStockMenorAlerta(DateTime fechaInicio, DateTime fechaFin)
+		{
+			DataTable dt = new DataTable();
+			using (SqlConnection con = conexion.ObtenerConexion())
+			{
+				string query = @"SELECT P.ID_Producto, P.Nombre, P.Stock, C.Nombre as Categoria 
+                         FROM Productos P 
+                         INNER JOIN Categoria C ON P.ID_Categoria = C.ID_Categoria 
+                         WHERE P.Stock <= @alerta";
+
+				SqlCommand cmd = new SqlCommand(query, con);
+				cmd.Parameters.AddWithValue("@alerta", 5); // umbral de alerta fijo
+				SqlDataAdapter da = new SqlDataAdapter(cmd);
+				da.Fill(dt);
+			}
+			return dt;
+		}
 	}
 }

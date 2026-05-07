@@ -1,81 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-<<<<<<< HEAD
-=======
 using System.Data;
 using System.Drawing;
->>>>>>> 21b8bb4b051c176eb666c7c7a6d1fcedbf3db64c
 using System.Linq;
+using System.Windows.Forms;
+using DAL;
 using EL;
+using BLL;
 
-namespace DAL
+namespace GUI
 {
-<<<<<<< HEAD
-    public static class DataStore
-    {
-        public static List<Usuario> Usuarios { get; set; } = new List<Usuario>();
-        public static List<Producto> Productos { get; set; } = new List<Producto>();
-        public static List<Venta> Ventas { get; set; } = new List<Venta>();
-        public static Usuario UsuarioActual { get; set; }
-
-        public static void InicializarDatos()
-        {
-            if (Usuarios.Count == 0)
-            {
-                Usuarios.Add(new Usuario
-                {
-                    Id = 1,
-                    Nombre = "Admin",
-                    Apellido = "Super",
-                    Email = "admin@supercash.com",
-                    Contrasena = "admin123",
-                    Rol = "Administrador"
-                });
-
-                Usuarios.Add(new Usuario
-                {
-                    Id = 2,
-                    Nombre = "Vendedor",
-                    Apellido = "User",
-                    Email = "vendedor@supercash.com",
-                    Contrasena = "vende123",
-                    Rol = "Vendedor"
-                });
-            }
-            {
-                Usuarios.Add(new Usuario
-                {
-                    Id = 3,
-                    Nombre = "diego",
-                    Apellido = "Martinez",
-                    Email = "diego@supercash.com",
-                    Contrasena = "diego123",
-                    Rol = "Administrador"
-                });
-
-                Usuarios.Add(new Usuario
-                {
-                    Id = 4,
-                    Nombre = "josue",
-                    Apellido = "Salguero",
-                    Email = "diego@supercash.com",
-                    Contrasena = "josue123",
-                    Rol = "Vendedor"
-                });
-            }
-
-            if (Productos.Count == 0)
-            {
-                Productos.Add(new Producto { Id = 1, Nombre = "Arroz", Categoria = "Granos", Precio = 2.50m, Stock = 50 });
-                Productos.Add(new Producto { Id = 2, Nombre = "Leche", Categoria = "Lácteos", Precio = 1.80m, Stock = 30 });
-                Productos.Add(new Producto { Id = 3, Nombre = "Pan", Categoria = "Panadería", Precio = 0.90m, Stock = 5 });
-                Productos.Add(new Producto { Id = 4, Nombre = "Coca Cola", Categoria = "Bebidas", Precio = 1.50m, Stock = 20 });
-                Productos.Add(new Producto { Id = 5, Nombre = "Jabón", Categoria = "Limpieza", Precio = 2.00m, Stock = 15 });
-            }
-        }
-    }
-}
-=======
 	public partial class frmAdmin : Form
 	{
 		// Instancia de la capa de datos
@@ -88,6 +22,18 @@ namespace DAL
 			ConfigurarFormulario();
 			CargarProductos();
 			CargarCategoria();
+		}
+
+		// Nuevo: abrir formulario para agregar vendedores
+		private void btnAgregarVendedor_Click(object sender, EventArgs e)
+		{
+			// Abrir una nueva pestaña (form) para agregar vendedores
+			using (var frm = new frmAgregarVendedor())
+			{
+				frm.StartPosition = FormStartPosition.CenterParent;
+				frm.ShowDialog(this);
+				// Después de cerrar, podríamos refrescar lista de vendedores si existiera
+			}
 		}
 
 		private void ConfigurarFormulario()
@@ -192,6 +138,14 @@ namespace DAL
 				MessageBox.Show("Error al guardar: " + ex.Message);
 			}
 		}
+
+		// Agregado: manejador para btnNuevo (corrige referencia en el diseñador)
+		private void btnNuevo_Click(object sender, EventArgs e)
+		{
+			// Preparar el formulario para ingresar un nuevo producto
+			LimpiarFormulario();
+		}
+
 		private void btnEliminar_Click(object sender, EventArgs e)
 		{
 			if (dgvProductos.SelectedRows.Count > 0)
@@ -366,6 +320,72 @@ namespace DAL
 			FiltrarAhora();
 		}
 
+		private void btnReporteStock_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				// Obtener el rango de fechas
+				DateTime fechaInicio = dtpFechaInicio.Value.Date;
+				DateTime fechaFin = dtpFechaFin.Value.Date.AddDays(1).AddTicks(-1); // Hasta el final del día
+
+				// Validar fechas
+				if (fechaFin < fechaInicio)
+				{
+					MessageBox.Show("La fecha de fin no puede ser anterior a la fecha de inicio.");
+					return;
+				}
+
+				// Obtener el DataTable con el reporte
+				DataTable dtReporte = proDAL.ReporteStockMenorAlerta(fechaInicio, fechaFin);
+
+				// Validar si hay datos
+				if (dtReporte == null || dtReporte.Rows.Count == 0)
+				{
+					MessageBox.Show("No hay datos para mostrar en el reporte.");
+					return;
+				}
+
+				// Crear un nuevo formulario para mostrar el reporte
+				using (var reporteForm = new GUI.frmReporte())
+				{
+					// Enviar el DataTable al formulario de reporte
+					reporteForm.SetDataSource(dtReporte);
+
+					// Mostrar el formulario de reporte
+					reporteForm.ShowDialog();
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("Error al generar el reporte: " + ex.Message);
+			}
 		}
-	}
->>>>>>> 21b8bb4b051c176eb666c7c7a6d1fcedbf3db64c
+
+		private void btnRefrescar_Click(object sender, EventArgs e)
+		{
+			// Refresh product list and clear form fields
+			CargarProductos();
+			LimpiarFormulario();
+		}
+
+		// Agregado: manejador para btnLimpiarFiltros (evita CS1061)
+		private void btnLimpiarFiltros_Click(object sender, EventArgs e)
+		{
+			// Limpiar campo de búsqueda y restablecer filtro de categoría
+			txtBuscar.Clear();
+			if (cmbFiltroCategoria.Items.Count > 0) cmbFiltroCategoria.SelectedIndex = 0;
+			// Refrescar lista
+			CargarProductos();
+		}
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvProductos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+    }
+}

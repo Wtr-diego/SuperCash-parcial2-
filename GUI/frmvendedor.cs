@@ -165,8 +165,55 @@ namespace GUI
 
 		private void btnCerrarSesion_Click(object sender, EventArgs e)
 		{
+         // Preguntar confirmación antes de cerrar sesión
+			var resp = MessageBox.Show("¿Está seguro que desea cerrar sesión?", "Confirmar cierre de sesión", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+			if (resp != DialogResult.Yes)
+			{
+				return;
+			}
+
+			// Limpiar sesión y volver al formulario de login en lugar de cerrar la aplicación
 			EL.Sesion.UsuarioActual = null;
-			this.Close(); // Esto asume que el Login es el que abrió este form
+			// Mostrar la ventana de login existente si está abierta, si no crear una nueva
+			var existingLogin = Application.OpenForms.OfType<frmLogin>().FirstOrDefault();
+			if (existingLogin != null)
+			{
+				existingLogin.Show();
+				existingLogin.BringToFront();
+			}
+			else
+			{
+				new frmLogin().Show();
+			}
+			this.Close();
+		}
+
+		// --- Added missing event handlers referenced by the Designer ---
+		private void btnQuitar_Click(object sender, EventArgs e)
+		{
+			if (dgvCarrito.CurrentRow == null)
+			{
+				MessageBox.Show("Seleccione un item del carrito", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				return;
+			}
+
+			var item = dgvCarrito.CurrentRow.DataBoundItem as ItemVenta;
+			if (item == null) return;
+
+			carrito.Remove(item);
+			ActualizarCarrito();
+		}
+
+		private void btnLimpiarBusqueda_Click(object sender, EventArgs e)
+		{
+			txtBuscarProducto.Text = string.Empty;
+			CargarProductos();
+		}
+
+		private void nudCantidad_ValueChanged(object sender, EventArgs e)
+		{
+			if (nudCantidad.Value < 1)
+				nudCantidad.Value = 1;
 		}
 	}
 

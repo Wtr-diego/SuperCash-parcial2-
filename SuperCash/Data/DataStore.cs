@@ -20,7 +20,6 @@ namespace SuperCash.Data
                     Id = 1,
                     Nombre = "Admin",
                     Apellido = "Super",
-                    Email = "admin@supercash.com",
                     Contrasena = "admin123",
                     Rol = "Administrador"
                 });
@@ -30,7 +29,6 @@ namespace SuperCash.Data
                     Id = 2,
                     Nombre = "Vendedor",
                     Apellido = "User",
-                    Email = "vendedor@supercash.com",
                     Contrasena = "vende123",
                     Rol = "Vendedor"
                 });
@@ -40,7 +38,6 @@ namespace SuperCash.Data
                     Id = 2,
                     Nombre = "Diego",
                     Apellido = "Martinez",
-                    Email = "diego@supercash.com",
                     Contrasena = "diego123",
                     Rol = "Vendedor"
                 });

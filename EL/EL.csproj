@@ -51,10 +51,7 @@
   <ItemGroup>
     <Compile Include="auditoria.cs" />
     <Compile Include="categoria.cs" />
-<<<<<<< HEAD
-=======
     <Compile Include="Detalleventa.cs" />
->>>>>>> 21b8bb4b051c176eb666c7c7a6d1fcedbf3db64c
     <Compile Include="producto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sesion.cs" />
@@ -78,6 +75,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

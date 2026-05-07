@@ -37,7 +37,7 @@ namespace SuperCash.Forms
         {
             if (string.IsNullOrWhiteSpace(txtUsuario.Text))
             {
-                txtUsuario.Text = "correo@ejemplo.com";
+                txtUsuario.Text = "Ingrese su usuario";
                 txtUsuario.ForeColor = Color.Gray;
             }
 
@@ -52,7 +52,7 @@ namespace SuperCash.Forms
 
         private void txtUsuario_Enter(object sender, EventArgs e)
         {
-            if (txtUsuario.Text == "correo@ejemplo.com" || txtUsuario.Text == "Ingrese su usuario")
+            if (txtUsuario.Text == "Ingrese su usuario")
             {
                 txtUsuario.Text = "";
                 txtUsuario.ForeColor = Color.Black;
@@ -63,7 +63,7 @@ namespace SuperCash.Forms
         {
             if (string.IsNullOrWhiteSpace(txtUsuario.Text))
             {
-                txtUsuario.Text = "correo@ejemplo.com";
+                txtUsuario.Text = "Ingrese su usuario";
                 txtUsuario.ForeColor = Color.Gray;
             }
         }
@@ -96,9 +96,9 @@ namespace SuperCash.Forms
             string contrasenaInput = txtContrasena.Text;
 
             // Validar campos
-            if (usuarioInput == "correo@ejemplo.com" || string.IsNullOrWhiteSpace(usuarioInput))
+            if (string.IsNullOrWhiteSpace(usuarioInput) || usuarioInput == "Ingrese su usuario")
             {
-                MessageBox.Show("Por favor, ingrese su usuario o correo electrónico", "Campo requerido",
+                MessageBox.Show("Por favor, ingrese su usuario", "Campo requerido",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtUsuario.Focus();
                 return;
@@ -112,11 +112,9 @@ namespace SuperCash.Forms
                 return;
             }
 
-            // Buscar usuario por email o nombre
+            // Buscar usuario por nombre (ya no se utiliza email)
             var usuario = DataStore.Usuarios.FirstOrDefault(u =>
-                (u.Email == usuarioInput || u.Nombre == usuarioInput ||
-                 (u.Email != null && u.Email.Split('@')[0] == usuarioInput)) &&
-                u.Contrasena == contrasenaInput);
+                u.Nombre == usuarioInput && u.Contrasena == contrasenaInput);
 
             if (usuario != null)
             {
