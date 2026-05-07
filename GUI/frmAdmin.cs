@@ -24,6 +24,7 @@ namespace GUI
 			CargarCategoria();
 		}
 
+<<<<<<< HEAD
 		// Nuevo: abrir formulario para agregar vendedores
 		private void btnAgregarVendedor_Click(object sender, EventArgs e)
 		{
@@ -33,6 +34,16 @@ namespace GUI
 				frm.StartPosition = FormStartPosition.CenterParent;
 				frm.ShowDialog(this);
 				// Después de cerrar, podríamos refrescar lista de vendedores si existiera
+=======
+		private void LimpiarTextboxes(Control.ControlCollection controles)
+		{
+			foreach (Control ctrl in controles)
+			{
+				if (ctrl is TextBox)
+				{
+					((TextBox)ctrl).Clear();
+				}
+>>>>>>> 3b62ba2ea547fb8c7726296946c29fdb89503f56
 			}
 		}
 
@@ -103,15 +114,35 @@ namespace GUI
 				decimal precio = nudPrecio.Value;
 				int stock = (int)nudStock.Value;
 				int idCategoria = Convert.ToInt32(cmbCategoria.SelectedValue);
+				string error = "";
 
-				if (string.IsNullOrEmpty(nombre))
+
+				// Validar campos vacíos
+				error = BLL.Validaciones.CampoVacio(nombre, "Nombre del Producto");
+				if (error != "") { MessageBox.Show(error, "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning); return; }
+
+				// Validar montos (No negativos ni cero)
+				error = BLL.Validaciones.PrecioValido(precio);
+				if (error != "") { MessageBox.Show(error, "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning); return; }
+
+				// Validar cantidades (No negativos)
+				error = BLL.Validaciones.CantidadValida(stock);
+				if (error != "") { MessageBox.Show(error, "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning); return; }
+
+				// Validar duplicados
+				if (idProductoSeleccionado == 0)
 				{
-					MessageBox.Show("Por favor, ingrese el nombre del producto.");
-					return;
+					if (proDAL.ExisteProducto(nombre)) // Asegúrate de tener este método en ProductoDAL
+					{
+						MessageBox.Show("Ya existe un producto con ese nombre. Evite duplicados.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+						return;
+					}
 				}
+
 
 				bool resultado = false;
 
+				// Determina si es un guardado nuevo o una edición
 				if (idProductoSeleccionado == 0)
 				{
 					resultado = proDAL.Insertar(nombre, precio, stock, idCategoria);
@@ -130,12 +161,12 @@ namespace GUI
 				}
 				else
 				{
-					MessageBox.Show("No se pudo completar la operación en la base de datos.");
+					MessageBox.Show("No se pudo completar la operación en la base de datos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show("Error al guardar: " + ex.Message);
+				MessageBox.Show("Error inesperado al guardar: " + ex.Message, "Error del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
