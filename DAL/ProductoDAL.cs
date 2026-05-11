@@ -26,6 +26,37 @@ namespace DAL
 			}
 		}
 
+		public bool RegistrarVentaConStock(int id, int cant, double tot)
+		{
+			using (SqlConnection con = conexion.ObtenerConexion())
+			{
+				con.Open();
+				SqlTransaction trans = con.BeginTransaction();
+				try
+				{
+					string qVenta = "INSERT INTO Ventas (ID_Usuario, Fecha, Total) VALUES (1, GETDATE(), @t)";
+					SqlCommand cmdV = new SqlCommand(qVenta, con, trans);
+					cmdV.Parameters.AddWithValue("@t", tot);
+					cmdV.ExecuteNonQuery();
+
+					string qStock = "UPDATE Productos SET Stock = Stock - @c WHERE ID_Producto = @id";
+					SqlCommand cmdS = new SqlCommand(qStock, con, trans);
+					cmdS.Parameters.AddWithValue("@c", cant);
+					cmdS.Parameters.AddWithValue("@id", id);
+					cmdS.ExecuteNonQuery();
+
+					trans.Commit();
+					return true;
+				}
+				catch (Exception ex)
+				{
+					trans.Rollback();
+					System.Windows.Forms.MessageBox.Show("Error de SQL: " + ex.Message);
+					return false;
+				}
+			}
+		}
+
 		public DataTable BuscarProductosVendedor(string nombre, string categoria)
 		{
 			DataTable dt = new DataTable();
@@ -121,10 +152,9 @@ namespace DAL
 			return dt;
 		}
 
-<<<<<<< HEAD
 		// Nuevo método: ReporteStockMenorAlerta
 		// Nota: actualmente los parámetros de fecha se ignoran porque la tabla Productos
-		// no contiene información temporal en el esquema proporcionado. Este método
+		// no contiene información	 temporal en el esquema proporcionado. Este método
 		// devuelve los productos con stock menor o igual a un umbral de alerta.
 		public DataTable ReporteStockMenorAlerta(DateTime fechaInicio, DateTime fechaFin)
 		{
@@ -142,7 +172,8 @@ namespace DAL
 				da.Fill(dt);
 			}
 			return dt;
-=======
+		}
+
 		// Método para verificar si un producto ya existe en la base de datos
 		public bool ExisteProducto(string nombre)
 		{
@@ -158,7 +189,24 @@ namespace DAL
 
 				return conteo > 0;
 			}
->>>>>>> 3b62ba2ea547fb8c7726296946c29fdb89503f56
+		}
+
+		public DataTable ObtenerVentasPorMes()
+		{
+			DataTable dt = new DataTable();
+			using (SqlConnection con = conexion.ObtenerConexion())
+			{
+				string query = @"SELECT DATENAME(MONTH, Fecha) AS Mes, 
+                         SUM(Total) AS Monto 
+                         FROM Ventas 
+                         GROUP BY MONTH(Fecha), DATENAME(MONTH, Fecha)
+                         ORDER BY MONTH(Fecha)";
+
+				SqlCommand cmd = new SqlCommand(query, con);
+				SqlDataAdapter da = new SqlDataAdapter(cmd);
+				da.Fill(dt);
+			}
+			return dt;
 		}
 	}
 }

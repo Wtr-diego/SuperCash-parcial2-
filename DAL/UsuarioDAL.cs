@@ -2,23 +2,20 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using EL; // Asegúrate de que tu clase Usuario esté aquí
+using EL;
 
 namespace DAL
 {
     public class UsuarioDAL
     {
-        // 1. Cadena de conexión configurada para TU servidor
-        private string cadena = @"Server=DIEGO\SQLEXPRESS;Database=SuperCashDB;Integrated Security=True;TrustServerCertificate=True;";
+        private string cadena = "Server=SANCHEZ\\SQLEXPRESS;Database=SuperCashDB;Integrated Security=True;TrustServerCertificate=True;";
 
-        // 2. Método para Validar Login
         public Usuario ValidarUsuario(string userOrEmail, string password)
         {
             Usuario usuarioEncontrado = null;
 
             using (SqlConnection cn = new SqlConnection(cadena))
             {
-                // Ajustado a tus columnas reales: NombreUsuario y Password
                 string query = "SELECT ID_Usuario, Nombres, Apellidos, Rol, NombreUsuario FROM Usuarios WHERE NombreUsuario = @user AND Password = @pass";
 
                 SqlCommand cmd = new SqlCommand(query, cn);
@@ -51,12 +48,10 @@ namespace DAL
             return usuarioEncontrado;
         }
 
-        // 3. MÉTODO INSERTAR (sin email)
         public bool Insertar(string nombres, string apellidos, string nombreUsuario, string password, string rol = "Vendedor")
         {
             using (SqlConnection cn = new SqlConnection(cadena))
             {
-                // Consulta ajustada sin columna Email
                 string query = "INSERT INTO Usuarios (Nombres, Apellidos, Rol, NombreUsuario, Password) " +
                                "VALUES (@n, @a, @r, @nu, @p)";
 
@@ -79,7 +74,6 @@ namespace DAL
             }
         }
 
-        // 4. Método para Listar (Necesario para tu CRUD)
         public List<Usuario> ListarUsuarios()
         {
             List<Usuario> lista = new List<Usuario>();

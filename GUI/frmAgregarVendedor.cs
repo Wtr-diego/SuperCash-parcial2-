@@ -13,87 +13,121 @@ namespace GUI
 
         private void InitializeComponent()
         {
-            this.txtNombre = new System.Windows.Forms.TextBox();
-            this.txtApellido = new System.Windows.Forms.TextBox();
-            this.btnGuardar = new System.Windows.Forms.Button();
-            this.btnCancelar = new System.Windows.Forms.Button();
-            this.txtUsuario = new System.Windows.Forms.TextBox();
-            this.txtPassword = new System.Windows.Forms.TextBox();
-            this.SuspendLayout();
-            // 
-            // txtNombre
-            // 
-            this.txtNombre.Location = new System.Drawing.Point(16, 16);
-            this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(300, 22);
-            this.txtNombre.TabIndex = 0;
-            this.txtNombre.Text = "Nombre";
-            this.txtNombre.TextChanged += new System.EventHandler(this.txtNombre_TextChanged);
-            // 
-            // txtApellido
-            // 
-            this.txtApellido.Location = new System.Drawing.Point(16, 48);
-            this.txtApellido.Name = "txtApellido";
-            this.txtApellido.Size = new System.Drawing.Size(300, 22);
-            this.txtApellido.TabIndex = 1;
-            this.txtApellido.Text = "Apellido";
-            this.txtApellido.TextChanged += new System.EventHandler(this.txtApellido_TextChanged);
-            // 
-            // txtEmail removed: email no longer used in form
-            // 
-            // btnGuardar
-            // 
-            this.btnGuardar.Location = new System.Drawing.Point(16, 180);
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(140, 36);
-            this.btnGuardar.TabIndex = 5;
-            this.btnGuardar.Text = "Guardar";
-            this.btnGuardar.UseVisualStyleBackColor = true;
-            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.Location = new System.Drawing.Point(176, 180);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(140, 36);
-            this.btnCancelar.TabIndex = 6;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.UseVisualStyleBackColor = true;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
-            // 
-            // txtUsuario
-            // 
-            this.txtUsuario.Location = new System.Drawing.Point(16, 112);
-            this.txtUsuario.Name = "txtUsuario";
-            this.txtUsuario.Size = new System.Drawing.Size(300, 22);
-            this.txtUsuario.TabIndex = 3;
-            this.txtUsuario.Text = "Usuario";
-            // 
-            // txtPassword
-            // 
-            this.txtPassword.Location = new System.Drawing.Point(16, 144);
-            this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(300, 22);
-            this.txtPassword.TabIndex = 4;
-            this.txtPassword.Text = "Contraseña";
-            this.txtPassword.UseSystemPasswordChar = true;
-            // 
-            // frmAgregarVendedor
-            // 
-            this.ClientSize = new System.Drawing.Size(336, 230);
-            this.Controls.Add(this.btnCancelar);
-            this.Controls.Add(this.btnGuardar);
-            this.Controls.Add(this.txtPassword);
-            this.Controls.Add(this.txtUsuario);
-            this.Controls.Add(this.txtApellido);
-            this.Controls.Add(this.txtNombre);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "frmAgregarVendedor";
-            this.Text = "Agregar Vendedor";
-            this.ResumeLayout(false);
-            this.PerformLayout();
+			this.txtNombre = new System.Windows.Forms.TextBox();
+			this.txtApellido = new System.Windows.Forms.TextBox();
+			this.btnGuardar = new System.Windows.Forms.Button();
+			this.btnCancelar = new System.Windows.Forms.Button();
+			this.txtUsuario = new System.Windows.Forms.TextBox();
+			this.txtPassword = new System.Windows.Forms.TextBox();
+			this.textBox1 = new System.Windows.Forms.TextBox();
+			this.textBox2 = new System.Windows.Forms.TextBox();
+			this.textBox3 = new System.Windows.Forms.TextBox();
+			this.textBox4 = new System.Windows.Forms.TextBox();
+			this.SuspendLayout();
+			// 
+			// txtNombre
+			// 
+			this.txtNombre.Location = new System.Drawing.Point(16, 56);
+			this.txtNombre.Name = "txtNombre";
+			this.txtNombre.Size = new System.Drawing.Size(300, 22);
+			this.txtNombre.TabIndex = 0;
+			this.txtNombre.TextChanged += new System.EventHandler(this.txtNombre_TextChanged);
+			// 
+			// txtApellido
+			// 
+			this.txtApellido.Location = new System.Drawing.Point(16, 112);
+			this.txtApellido.Name = "txtApellido";
+			this.txtApellido.Size = new System.Drawing.Size(300, 22);
+			this.txtApellido.TabIndex = 1;
+			this.txtApellido.TextChanged += new System.EventHandler(this.txtApellido_TextChanged);
+			// 
+			// btnGuardar
+			// 
+			this.btnGuardar.Location = new System.Drawing.Point(16, 283);
+			this.btnGuardar.Name = "btnGuardar";
+			this.btnGuardar.Size = new System.Drawing.Size(140, 36);
+			this.btnGuardar.TabIndex = 5;
+			this.btnGuardar.Text = "Guardar";
+			this.btnGuardar.UseVisualStyleBackColor = true;
+			this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
+			// 
+			// btnCancelar
+			// 
+			this.btnCancelar.Location = new System.Drawing.Point(176, 283);
+			this.btnCancelar.Name = "btnCancelar";
+			this.btnCancelar.Size = new System.Drawing.Size(140, 36);
+			this.btnCancelar.TabIndex = 6;
+			this.btnCancelar.Text = "Cancelar";
+			this.btnCancelar.UseVisualStyleBackColor = true;
+			this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+			// 
+			// txtUsuario
+			// 
+			this.txtUsuario.Location = new System.Drawing.Point(16, 168);
+			this.txtUsuario.Name = "txtUsuario";
+			this.txtUsuario.Size = new System.Drawing.Size(300, 22);
+			this.txtUsuario.TabIndex = 3;
+			// 
+			// txtPassword
+			// 
+			this.txtPassword.Location = new System.Drawing.Point(16, 224);
+			this.txtPassword.Name = "txtPassword";
+			this.txtPassword.Size = new System.Drawing.Size(300, 22);
+			this.txtPassword.TabIndex = 4;
+			this.txtPassword.UseSystemPasswordChar = true;
+			// 
+			// textBox1
+			// 
+			this.textBox1.Location = new System.Drawing.Point(16, 28);
+			this.textBox1.Name = "textBox1";
+			this.textBox1.Size = new System.Drawing.Size(100, 22);
+			this.textBox1.TabIndex = 7;
+			this.textBox1.Text = "Nombre:";
+			// 
+			// textBox2
+			// 
+			this.textBox2.Location = new System.Drawing.Point(16, 84);
+			this.textBox2.Name = "textBox2";
+			this.textBox2.Size = new System.Drawing.Size(100, 22);
+			this.textBox2.TabIndex = 8;
+			this.textBox2.Text = "Apellido:";
+			// 
+			// textBox3
+			// 
+			this.textBox3.Location = new System.Drawing.Point(16, 140);
+			this.textBox3.Name = "textBox3";
+			this.textBox3.Size = new System.Drawing.Size(100, 22);
+			this.textBox3.TabIndex = 9;
+			this.textBox3.Text = "Usuario:";
+			// 
+			// textBox4
+			// 
+			this.textBox4.Location = new System.Drawing.Point(16, 196);
+			this.textBox4.Name = "textBox4";
+			this.textBox4.Size = new System.Drawing.Size(100, 22);
+			this.textBox4.TabIndex = 10;
+			this.textBox4.Text = "Contraseña:";
+			// 
+			// frmAgregarVendedor
+			// 
+			this.ClientSize = new System.Drawing.Size(332, 331);
+			this.Controls.Add(this.textBox4);
+			this.Controls.Add(this.textBox3);
+			this.Controls.Add(this.textBox2);
+			this.Controls.Add(this.textBox1);
+			this.Controls.Add(this.btnCancelar);
+			this.Controls.Add(this.btnGuardar);
+			this.Controls.Add(this.txtPassword);
+			this.Controls.Add(this.txtUsuario);
+			this.Controls.Add(this.txtApellido);
+			this.Controls.Add(this.txtNombre);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+			this.MaximizeBox = false;
+			this.MinimizeBox = false;
+			this.Name = "frmAgregarVendedor";
+			this.Text = "Agregar Vendedor";
+			this.ResumeLayout(false);
+			this.PerformLayout();
 
         }
 
@@ -143,7 +177,11 @@ namespace GUI
         private TextBox txtUsuario;
         private TextBox txtPassword;
         private Button btnGuardar;
-        private Button btnCancelar;
+		private TextBox textBox1;
+		private TextBox textBox2;
+		private TextBox textBox3;
+		private TextBox textBox4;
+		private Button btnCancelar;
 
         private void txtNombre_TextChanged(object sender, EventArgs e)
         {

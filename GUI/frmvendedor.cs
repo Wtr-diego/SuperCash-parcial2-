@@ -1,25 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data; 
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using BLL;
 using DAL;
 using EL;
-using BLL;
 
 namespace GUI
 {
 	public partial class frmVendedor : Form
 	{
-		private List<ItemVenta> carrito = new List<ItemVenta>();
-		private ProductoDAL proDAL = new ProductoDAL(); 
+		BindingList<ItemVenta> carrito = new BindingList<ItemVenta>();
+		private ProductoDAL proDAL = new ProductoDAL();
+		Validaciones objBLL = new Validaciones();
 
 		public frmVendedor()
 		{
 			InitializeComponent();
 			ConfigurarFormulario();
-			CargarProductos(); 
+			CargarProductos();
+			dgvCarrito.DataSource = carrito;
 			ActualizarCarrito();
 		}
 
@@ -73,9 +76,6 @@ namespace GUI
 
 		private void ActualizarCarrito()
 		{
-			dgvCarrito.DataSource = null;
-			dgvCarrito.DataSource = carrito;
-
 			decimal total = carrito.Sum(item => item.Subtotal);
 			lblTotal.Text = $"Total: {total:C2}";
 			lblCantidadItems.Text = $"Items: {carrito.Sum(i => i.Cantidad)}";
@@ -133,13 +133,28 @@ namespace GUI
 
 			if (confirmacion == DialogResult.Yes)
 			{
-				// En el futuro llamaremos a VentaDAL para guardar en SQL
-				// Por ahora simulamos el éxito
-				MessageBox.Show(GenerarTicket(), "Ticket");
+				bool todoOk = true;
 
-				carrito.Clear();
-				ActualizarCarrito();
-				CargarProductos(); // Refrescamos stock desde la DB
+				foreach (var item in carrito)
+				{
+					bool rpta = objBLL.ProcesarVenta(item.ProductoId, item.Cantidad, (double)item.Subtotal);
+
+					if (!rpta) todoOk = false;
+				}
+
+				if (todoOk)
+				{
+					MessageBox.Show("¡Venta exitosa! Stock actualizado.");
+					string mensajeTicket = GenerarTicket();
+					MessageBox.Show(mensajeTicket, "Ticket de Venta", MessageBoxButtons.OK, MessageBoxIcon.Information);
+					carrito.Clear();
+					ActualizarCarrito();
+					CargarProductos();
+				}
+				else
+				{
+					MessageBox.Show("Error al procesar la venta. Revisa la conexión o los nombres de las columnas.");
+				}
 			}
 		}
 
@@ -188,20 +203,30 @@ namespace GUI
 			this.Close();
 		}
 
-		// --- Added missing event handlers referenced by the Designer ---
 		private void btnQuitar_Click(object sender, EventArgs e)
 		{
-			if (dgvCarrito.CurrentRow == null)
+			try
 			{
-				MessageBox.Show("Seleccione un item del carrito", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-				return;
+				if (dgvCarrito.CurrentRow != null && dgvCarrito.CurrentRow.Index >= 0)
+				{
+					int indice = dgvCarrito.CurrentRow.Index;
+
+					if (indice < carrito.Count)
+					{
+						carrito.RemoveAt(indice); 
+						ActualizarCarrito();      
+					}
+				}
+				else
+				{
+					MessageBox.Show("Haz clic en un producto primero.", "Aviso");
+				}
 			}
-
-			var item = dgvCarrito.CurrentRow.DataBoundItem as ItemVenta;
-			if (item == null) return;
-
-			carrito.Remove(item);
-			ActualizarCarrito();
+			catch (Exception ex)
+			{
+				// ¡Si algo falla, no se cierra! Te muestra esta ventana con la pista final:
+				MessageBox.Show("El error exacto ocurre en:\n\n" + ex.StackTrace, "Atrapado!");
+			}
 		}
 
 		private void btnLimpiarBusqueda_Click(object sender, EventArgs e)

@@ -1,17 +1,21 @@
 ﻿using System;
+using System.Data;
 using System.Text.RegularExpressions;
+using DAL;
 
 namespace BLL
 {
-    public static class Validaciones
+    public class Validaciones
     {
+        private static readonly ProductoDAL proDAL = new ProductoDAL();
+
         // Validar que un campo no esté vacío
         public static string CampoVacio(string texto, string nombreCampo)
         {
             if (string.IsNullOrWhiteSpace(texto))
                 return $"El campo {nombreCampo} es obligatorio.";
 
-			return "";
+            return "";
         }
 
         // Validar que el precio sea mayor a 0
@@ -19,7 +23,7 @@ namespace BLL
         {
             if (precio <= 0)
                 return "El precio debe ser mayor a cero.";
-            
+
             return "";
         }
 
@@ -29,7 +33,7 @@ namespace BLL
             if (cantidad < 0)
                 return "La cantidad no puede ser negativa.";
 
-			return "";
+            return "";
         }
 
         // Validar que el email tenga formato correcto
@@ -44,7 +48,7 @@ namespace BLL
                 return "El formato del email es inválido.";
             }
             return "";
-		}
+        }
 
         // Fecha Valida
         public static string FechaValida(string fechaTexto, string nombreCampo)
@@ -54,10 +58,10 @@ namespace BLL
             if (!DateTime.TryParse(fechaTexto, out _))
                 return $"El campo {nombreCampo} debe ser una fecha válida.";
             return "";
-		}
+        }
 
-		// Validar que solo tenga números
-		public static string SoloNumeros(string texto)
+        // Validar que solo tenga números
+        public static string SoloNumeros(string texto)
         {
             if (string.IsNullOrWhiteSpace(texto))
                 return "El campo es obligatorio.";
@@ -76,7 +80,7 @@ namespace BLL
         {
             if (string.IsNullOrWhiteSpace(texto))
                 return "El campo es obligatorio.";
-			
+
             foreach (char c in texto)
             {
                 if (!char.IsLetter(c) && !char.IsWhiteSpace(c))
@@ -85,42 +89,51 @@ namespace BLL
                 }
             }
             return "";
-		}
+        }
 
-		// Validar si un producto alcanzó el stock mínimo
-		public static string EsStockBajo(int cantidadActual, int limiteMinimo = 5)
-		{
-			if (cantidadActual <= limiteMinimo)
-			{
-				return $"¡Alerta de Inventario! El stock actual ({cantidadActual}) es bajo.";
-			}
-			return "";
-		}
+        // Validar si un producto alcanzó el stock mínimo
+        public static string EsStockBajo(int cantidadActual, int limiteMinimo = 5)
+        {
+            if (cantidadActual <= limiteMinimo)
+            {
+                return $"¡Alerta de Inventario! El stock actual ({cantidadActual}) es bajo.";
+            }
+            return "";
+        }
 
-		// Validar que el texto sea un número decimal válido
-		public static string EsDecimalValido(string texto, out decimal resultado)
-		{
-			if (string.IsNullOrWhiteSpace(texto))
-			{
-				resultado = 0;
-				return "El campo es obligatorio.";
-			}
-			if (!decimal.TryParse(texto, out resultado))
-			{
-				return "Por favor, ingrese un monto válido (ejemplo: 10.50).";
-			}
-			return "";
-		}
+        // Validar que el texto sea un número decimal válido
+        public static string EsDecimalValido(string texto, out decimal resultado)
+        {
+            if (string.IsNullOrWhiteSpace(texto))
+            {
+                resultado = 0;
+                return "El campo es obligatorio.";
+            }
+            if (!decimal.TryParse(texto, out resultado))
+            {
+                return "Por favor, ingrese un monto válido (ejemplo: 10.50).";
+            }
+            return "";
+        }
 
-		// Validar que un campo tenga una longitud mínima
-		public static string LongitudMinima(string texto, int minimo, string nombreCampo)
+        // Validar que un campo tenga una longitud mínima
+        public static string LongitudMinima(string texto, int minimo, string nombreCampo)
+        {
+            if (texto.Length < minimo)
+            {
+                return $"El campo {nombreCampo} debe tener al menos {minimo} caracteres.";
+            }
+            return "";
+        }
+
+        public DataTable ConsultarEstadisticasVentas()
+        {
+            return proDAL.ObtenerVentasPorMes();
+        }
+
+		public bool ProcesarVenta(int id, int cant, double tot)
 		{
-			if (texto.Length < minimo)
-			{
-				return $"El campo {nombreCampo} debe tener al menos {minimo} caracteres.";
-			}
-			return "";
+			return proDAL.RegistrarVentaConStock(id, cant, tot);
 		}
-			
 	}
 }

@@ -15,6 +15,7 @@ namespace GUI
 		// Instancia de la capa de datos
 		private ProductoDAL proDAL = new ProductoDAL();
 		private int idProductoSeleccionado = 0; // Usaremos el ID directamente
+		Validaciones objBLL = new Validaciones();
 
 		public frmAdmin()
 		{
@@ -24,7 +25,6 @@ namespace GUI
 			CargarCategoria();
 		}
 
-<<<<<<< HEAD
 		// Nuevo: abrir formulario para agregar vendedores
 		private void btnAgregarVendedor_Click(object sender, EventArgs e)
 		{
@@ -34,7 +34,8 @@ namespace GUI
 				frm.StartPosition = FormStartPosition.CenterParent;
 				frm.ShowDialog(this);
 				// Después de cerrar, podríamos refrescar lista de vendedores si existiera
-=======
+			}
+		}
 		private void LimpiarTextboxes(Control.ControlCollection controles)
 		{
 			foreach (Control ctrl in controles)
@@ -43,7 +44,6 @@ namespace GUI
 				{
 					((TextBox)ctrl).Clear();
 				}
->>>>>>> 3b62ba2ea547fb8c7726296946c29fdb89503f56
 			}
 		}
 
@@ -170,7 +170,6 @@ namespace GUI
 			}
 		}
 
-		// Agregado: manejador para btnNuevo (corrige referencia en el diseñador)
 		private void btnNuevo_Click(object sender, EventArgs e)
 		{
 			// Preparar el formulario para ingresar un nuevo producto
@@ -183,7 +182,6 @@ namespace GUI
 			{
 				int id = Convert.ToInt32(dgvProductos.CurrentRow.Cells["ID_Producto"].Value);
 
-				// Preguntar al usuario para evitar accidentes
 				DialogResult respuesta = MessageBox.Show("¿Seguro que quieres eliminar este producto?",
 					"Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
@@ -294,6 +292,8 @@ namespace GUI
 			CargarProductos();
 
 			VerificarStockBajo();
+
+			CargarGraficoVentas();
 		}
 
 		private void LlenarComboCategoria()
@@ -351,65 +351,54 @@ namespace GUI
 			FiltrarAhora();
 		}
 
-		private void btnReporteStock_Click(object sender, EventArgs e)
-		{
-			try
-			{
-				// Obtener el rango de fechas
-				DateTime fechaInicio = dtpFechaInicio.Value.Date;
-				DateTime fechaFin = dtpFechaFin.Value.Date.AddDays(1).AddTicks(-1); // Hasta el final del día
-
-				// Validar fechas
-				if (fechaFin < fechaInicio)
-				{
-					MessageBox.Show("La fecha de fin no puede ser anterior a la fecha de inicio.");
-					return;
-				}
-
-				// Obtener el DataTable con el reporte
-				DataTable dtReporte = proDAL.ReporteStockMenorAlerta(fechaInicio, fechaFin);
-
-				// Validar si hay datos
-				if (dtReporte == null || dtReporte.Rows.Count == 0)
-				{
-					MessageBox.Show("No hay datos para mostrar en el reporte.");
-					return;
-				}
-
-				// Crear un nuevo formulario para mostrar el reporte
-				using (var reporteForm = new GUI.frmReporte())
-				{
-					// Enviar el DataTable al formulario de reporte
-					reporteForm.SetDataSource(dtReporte);
-
-					// Mostrar el formulario de reporte
-					reporteForm.ShowDialog();
-				}
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show("Error al generar el reporte: " + ex.Message);
-			}
-		}
-
 		private void btnRefrescar_Click(object sender, EventArgs e)
 		{
-			// Refresh product list and clear form fields
 			CargarProductos();
 			LimpiarFormulario();
 		}
 
-		// Agregado: manejador para btnLimpiarFiltros (evita CS1061)
 		private void btnLimpiarFiltros_Click(object sender, EventArgs e)
 		{
-			// Limpiar campo de búsqueda y restablecer filtro de categoría
 			txtBuscar.Clear();
 			if (cmbFiltroCategoria.Items.Count > 0) cmbFiltroCategoria.SelectedIndex = 0;
 			// Refrescar lista
 			CargarProductos();
 		}
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+		private void CargarGraficoVentas()
+		{
+			chartVentas.Series["Series1"].Points.Clear();
+			chartVentas.Titles.Clear();
+			chartVentas.Titles.Add("Desempeño de Ventas Mensuales");
+
+			try
+			{
+				DataTable datos = objBLL.ConsultarEstadisticasVentas();
+
+				if (datos.Rows.Count > 0)
+				{
+					foreach (DataRow fila in datos.Rows)
+					{
+						chartVentas.Series["Series1"].Points.AddXY(fila["Mes"], fila["Monto"]);
+					}
+				}
+				else
+				{
+					// Se insertaron como prueba del grafico
+					chartVentas.Series["Series1"].Points.AddXY("Enero", 1200);
+					chartVentas.Series["Series1"].Points.AddXY("Febrero", 1800);
+					chartVentas.Series["Series1"].Points.AddXY("Marzo", 1500);
+					chartVentas.Series["Series1"].Points.AddXY("Abril", 2100);
+				}
+			}
+			catch
+			{
+				chartVentas.Series["Series1"].Points.AddXY("Mes 1", 100);
+				chartVentas.Series["Series1"].Points.AddXY("Mes 2", 300);
+			}
+		}
+
+		private void pictureBox1_Click(object sender, EventArgs e)
         {
 
         }
@@ -418,5 +407,10 @@ namespace GUI
         {
 
         }
-    }
+
+		private void chart1_Click(object sender, EventArgs e)
+		{
+
+		}
+	}
 }
