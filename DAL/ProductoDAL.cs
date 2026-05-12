@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using EL;
 
 namespace DAL
 {
@@ -26,7 +27,7 @@ namespace DAL
 			}
 		}
 
-		public bool RegistrarVentaConStock(int id, int cant, double tot)
+		public bool RegistrarVentaCompleta(int idUsuario, decimal total, List<ItemVenta> carrito)
 		{
 			using (SqlConnection con = conexion.ObtenerConexion())
 			{
@@ -34,16 +35,32 @@ namespace DAL
 				SqlTransaction trans = con.BeginTransaction();
 				try
 				{
-					string qVenta = "INSERT INTO Ventas (ID_Usuario, Fecha, Total) VALUES (1, GETDATE(), @t)";
+					string qVenta = "INSERT INTO Ventas (ID_Usuario, Fecha, Total) VALUES (@idUsu, GETDATE(), @t); SELECT SCOPE_IDENTITY();";
 					SqlCommand cmdV = new SqlCommand(qVenta, con, trans);
-					cmdV.Parameters.AddWithValue("@t", tot);
-					cmdV.ExecuteNonQuery();
+					cmdV.Parameters.AddWithValue("@idUsu", idUsuario);
+					cmdV.Parameters.AddWithValue("@t", total);
 
-					string qStock = "UPDATE Productos SET Stock = Stock - @c WHERE ID_Producto = @id";
-					SqlCommand cmdS = new SqlCommand(qStock, con, trans);
-					cmdS.Parameters.AddWithValue("@c", cant);
-					cmdS.Parameters.AddWithValue("@id", id);
-					cmdS.ExecuteNonQuery();
+					int idVenta = Convert.ToInt32(cmdV.ExecuteScalar());
+
+					foreach (var item in carrito)
+					{
+						// Guardar en DetalleVenta
+						string qDetalle = "INSERT INTO DetalleVenta (ID_Venta, ID_Producto, Cantidad, PrecioUnitario, Subtotal) VALUES (@idV, @idP, @c, @precio, @sub)";
+						SqlCommand cmdD = new SqlCommand(qDetalle, con, trans);
+						cmdD.Parameters.AddWithValue("@idV", idVenta);
+						cmdD.Parameters.AddWithValue("@idP", item.ProductoId);
+						cmdD.Parameters.AddWithValue("@c", item.Cantidad);
+						cmdD.Parameters.AddWithValue("@precio", item.PrecioUnitario);
+						cmdD.Parameters.AddWithValue("@sub", item.Subtotal);
+						cmdD.ExecuteNonQuery();
+
+						// Actualizar Stock
+						string qStock = "UPDATE Productos SET Stock = Stock - @c WHERE ID_Producto = @idP";
+						SqlCommand cmdS = new SqlCommand(qStock, con, trans);
+						cmdS.Parameters.AddWithValue("@c", item.Cantidad);
+						cmdS.Parameters.AddWithValue("@idP", item.ProductoId);
+						cmdS.ExecuteNonQuery();
+					}
 
 					trans.Commit();
 					return true;
@@ -51,7 +68,7 @@ namespace DAL
 				catch (Exception ex)
 				{
 					trans.Rollback();
-					System.Windows.Forms.MessageBox.Show("Error de SQL: " + ex.Message);
+					System.Windows.Forms.MessageBox.Show("Error al registrar venta: " + ex.Message);
 					return false;
 				}
 			}

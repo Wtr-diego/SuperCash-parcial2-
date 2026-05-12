@@ -4,9 +4,10 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
+using BLL;
 using DAL;
 using EL;
-using BLL;
 
 namespace GUI
 {
@@ -16,6 +17,7 @@ namespace GUI
 		private ProductoDAL proDAL = new ProductoDAL();
 		private int idProductoSeleccionado = 0; // Usaremos el ID directamente
 		Validaciones objBLL = new Validaciones();
+		VentaDAL objVentaDAL = new VentaDAL();
 
 		public frmAdmin()
 		{
@@ -23,6 +25,7 @@ namespace GUI
 			ConfigurarFormulario();
 			CargarProductos();
 			CargarCategoria();
+			CargarGraficoMasVendidos();
 		}
 
 		// Nuevo: abrir formulario para agregar vendedores
@@ -142,7 +145,6 @@ namespace GUI
 
 				bool resultado = false;
 
-				// Determina si es un guardado nuevo o una edición
 				if (idProductoSeleccionado == 0)
 				{
 					resultado = proDAL.Insertar(nombre, precio, stock, idCategoria);
@@ -172,7 +174,6 @@ namespace GUI
 
 		private void btnNuevo_Click(object sender, EventArgs e)
 		{
-			// Preparar el formulario para ingresar un nuevo producto
 			LimpiarFormulario();
 		}
 
@@ -190,7 +191,7 @@ namespace GUI
 					if (proDAL.Eliminar(id))
 					{
 						MessageBox.Show("Producto eliminado con éxito");
-						CargarProductos(); // Refrescamos la lista para que desaparezca
+						CargarProductos(); 
 						LimpiarFormulario();
 					}
 					else
@@ -293,7 +294,7 @@ namespace GUI
 
 			VerificarStockBajo();
 
-			CargarGraficoVentas();
+			CargarGraficoMasVendidos();
 		}
 
 		private void LlenarComboCategoria()
@@ -365,36 +366,30 @@ namespace GUI
 			CargarProductos();
 		}
 
-		private void CargarGraficoVentas()
+		private void CargarGraficoMasVendidos()
 		{
-			chartVentas.Series["Series1"].Points.Clear();
-			chartVentas.Titles.Clear();
-			chartVentas.Titles.Add("Desempeño de Ventas Mensuales");
-
 			try
 			{
-				DataTable datos = objBLL.ConsultarEstadisticasVentas();
+				DataTable dt = objVentaDAL.ObtenerTopProductos();
 
-				if (datos.Rows.Count > 0)
+				if (dt.Rows.Count > 0)
 				{
-					foreach (DataRow fila in datos.Rows)
-					{
-						chartVentas.Series["Series1"].Points.AddXY(fila["Mes"], fila["Monto"]);
-					}
-				}
-				else
-				{
-					// Se insertaron como prueba del grafico
-					chartVentas.Series["Series1"].Points.AddXY("Enero", 1200);
-					chartVentas.Series["Series1"].Points.AddXY("Febrero", 1800);
-					chartVentas.Series["Series1"].Points.AddXY("Marzo", 1500);
-					chartVentas.Series["Series1"].Points.AddXY("Abril", 2100);
+					chartVentas.Series[0].Points.Clear();
+
+					chartVentas.DataSource = dt;
+					chartVentas.Series[0].XValueMember = "Nombre";
+					chartVentas.Series[0].YValueMembers = "TotalVendido";	
+					chartVentas.Series[0].Name = "Unidades Vendidas";
+
+
+					chartVentas.Titles.Clear();
+					chartVentas.Titles.Add("Top 5 Productos Más Vendidos");
+					chartVentas.DataBind();
 				}
 			}
-			catch
+			catch (Exception ex)
 			{
-				chartVentas.Series["Series1"].Points.AddXY("Mes 1", 100);
-				chartVentas.Series["Series1"].Points.AddXY("Mes 2", 300);
+				MessageBox.Show("Error al cargar el gráfico: " + ex.Message);
 			}
 		}
 
@@ -409,6 +404,56 @@ namespace GUI
         }
 
 		private void chart1_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void btnReporteStock_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				int totalProductos = 0;
+				int productosBajosStock = 0;
+				string listaBajos = "";
+
+	
+				foreach (DataGridViewRow fila in dgvProductos.Rows)
+				{
+					if (!fila.IsNewRow)
+					{
+						totalProductos++;
+
+						string nombre = fila.Cells[1].Value?.ToString() ?? "Desconocido";
+						int stock = Convert.ToInt32(fila.Cells[3].Value);
+
+						if (stock <= 10)
+						{
+							productosBajosStock++;
+							listaBajos += $"- {nombre} (Quedan: {stock})\n";
+						}
+					}
+				}
+
+				string mensaje = $"Total de productos en catálogo: {totalProductos}\n\n";
+
+				if (productosBajosStock > 0)
+				{
+					mensaje += $"¡Atención! Tienes {productosBajosStock} producto(s) con stock bajo:\n{listaBajos}";
+					MessageBox.Show(mensaje, "Reporte de Stock", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				}
+				else
+				{
+					mensaje += "Todos los productos tienen buen stock (más de 10 unidades).";
+					MessageBox.Show(mensaje, "Reporte de Stock", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("Error al leer el stock: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		}
+
+		private void pictureBox1_Click_1(object sender, EventArgs e)
 		{
 
 		}

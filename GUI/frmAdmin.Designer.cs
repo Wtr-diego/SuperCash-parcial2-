@@ -81,12 +81,13 @@ namespace GUI
 			this.dgvProductos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
 			this.dgvProductos.ColumnHeadersHeight = 29;
-			this.dgvProductos.Location = new System.Drawing.Point(8, 274);
+			this.dgvProductos.Location = new System.Drawing.Point(11, 337);
+			this.dgvProductos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.dgvProductos.Name = "dgvProductos";
 			this.dgvProductos.ReadOnly = true;
 			this.dgvProductos.RowHeadersWidth = 51;
 			this.dgvProductos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.dgvProductos.Size = new System.Drawing.Size(554, 499);
+			this.dgvProductos.Size = new System.Drawing.Size(739, 650);
 			this.dgvProductos.TabIndex = 0;
 			this.dgvProductos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductos_CellClick);
 			this.dgvProductos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductos_CellContentClick);
@@ -94,69 +95,76 @@ namespace GUI
 			// 
 			// txtNombre
 			// 
-			this.txtNombre.Location = new System.Drawing.Point(12, 94);
+			this.txtNombre.Location = new System.Drawing.Point(16, 116);
+			this.txtNombre.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.txtNombre.Name = "txtNombre";
-			this.txtNombre.Size = new System.Drawing.Size(200, 20);
+			this.txtNombre.Size = new System.Drawing.Size(265, 22);
 			this.txtNombre.TabIndex = 1;
 			// 
 			// txtBuscar
 			// 
-			this.txtBuscar.Location = new System.Drawing.Point(362, 81);
+			this.txtBuscar.Location = new System.Drawing.Point(483, 100);
+			this.txtBuscar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.txtBuscar.Name = "txtBuscar";
-			this.txtBuscar.Size = new System.Drawing.Size(200, 20);
+			this.txtBuscar.Size = new System.Drawing.Size(265, 22);
 			this.txtBuscar.TabIndex = 2;
 			this.txtBuscar.TextChanged += new System.EventHandler(this.txtBuscar_TextChanged);
 			// 
 			// cmbCategoria
 			// 
 			this.cmbCategoria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.cmbCategoria.Location = new System.Drawing.Point(12, 119);
+			this.cmbCategoria.Location = new System.Drawing.Point(16, 146);
+			this.cmbCategoria.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.cmbCategoria.Name = "cmbCategoria";
-			this.cmbCategoria.Size = new System.Drawing.Size(200, 21);
+			this.cmbCategoria.Size = new System.Drawing.Size(265, 24);
 			this.cmbCategoria.TabIndex = 3;
 			// 
 			// cmbFiltroCategoria
 			// 
 			this.cmbFiltroCategoria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.cmbFiltroCategoria.Location = new System.Drawing.Point(362, 112);
+			this.cmbFiltroCategoria.Location = new System.Drawing.Point(483, 138);
+			this.cmbFiltroCategoria.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.cmbFiltroCategoria.Name = "cmbFiltroCategoria";
-			this.cmbFiltroCategoria.Size = new System.Drawing.Size(200, 21);
+			this.cmbFiltroCategoria.Size = new System.Drawing.Size(265, 24);
 			this.cmbFiltroCategoria.TabIndex = 4;
 			this.cmbFiltroCategoria.SelectedIndexChanged += new System.EventHandler(this.cmbFiltroCategoria_SelectedIndexChanged);
 			// 
 			// nudPrecio
 			// 
 			this.nudPrecio.DecimalPlaces = 2;
-			this.nudPrecio.Location = new System.Drawing.Point(12, 145);
+			this.nudPrecio.Location = new System.Drawing.Point(16, 178);
+			this.nudPrecio.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.nudPrecio.Maximum = new decimal(new int[] {
             1000000,
             0,
             0,
             0});
 			this.nudPrecio.Name = "nudPrecio";
-			this.nudPrecio.Size = new System.Drawing.Size(199, 20);
+			this.nudPrecio.Size = new System.Drawing.Size(265, 22);
 			this.nudPrecio.TabIndex = 5;
 			this.nudPrecio.ThousandsSeparator = true;
 			// 
 			// nudStock
 			// 
-			this.nudStock.Location = new System.Drawing.Point(12, 171);
+			this.nudStock.Location = new System.Drawing.Point(16, 210);
+			this.nudStock.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.nudStock.Maximum = new decimal(new int[] {
             100000,
             0,
             0,
             0});
 			this.nudStock.Name = "nudStock";
-			this.nudStock.Size = new System.Drawing.Size(199, 20);
+			this.nudStock.Size = new System.Drawing.Size(265, 22);
 			this.nudStock.TabIndex = 6;
 			// 
 			// btnGuardar
 			// 
 			this.btnGuardar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(204)))), ((int)(((byte)(113)))));
 			this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnGuardar.Location = new System.Drawing.Point(235, 94);
+			this.btnGuardar.Location = new System.Drawing.Point(313, 116);
+			this.btnGuardar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.btnGuardar.Name = "btnGuardar";
-			this.btnGuardar.Size = new System.Drawing.Size(100, 30);
+			this.btnGuardar.Size = new System.Drawing.Size(133, 37);
 			this.btnGuardar.TabIndex = 7;
 			this.btnGuardar.Text = "💾 Guardar";
 			this.btnGuardar.UseVisualStyleBackColor = false;
@@ -166,9 +174,10 @@ namespace GUI
 			// 
 			this.btnNuevo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
 			this.btnNuevo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnNuevo.Location = new System.Drawing.Point(235, 145);
+			this.btnNuevo.Location = new System.Drawing.Point(313, 178);
+			this.btnNuevo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.btnNuevo.Name = "btnNuevo";
-			this.btnNuevo.Size = new System.Drawing.Size(100, 30);
+			this.btnNuevo.Size = new System.Drawing.Size(133, 37);
 			this.btnNuevo.TabIndex = 8;
 			this.btnNuevo.Text = "✨ Nuevo";
 			this.btnNuevo.UseVisualStyleBackColor = false;
@@ -178,9 +187,10 @@ namespace GUI
 			// 
 			this.btnEliminar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
 			this.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnEliminar.Location = new System.Drawing.Point(12, 205);
+			this.btnEliminar.Location = new System.Drawing.Point(16, 252);
+			this.btnEliminar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.btnEliminar.Name = "btnEliminar";
-			this.btnEliminar.Size = new System.Drawing.Size(100, 30);
+			this.btnEliminar.Size = new System.Drawing.Size(133, 37);
 			this.btnEliminar.TabIndex = 9;
 			this.btnEliminar.Text = "🗑️ Eliminar";
 			this.btnEliminar.UseVisualStyleBackColor = false;
@@ -188,9 +198,10 @@ namespace GUI
 			// 
 			// btnBuscar
 			// 
-			this.btnBuscar.Location = new System.Drawing.Point(567, 76);
+			this.btnBuscar.Location = new System.Drawing.Point(756, 94);
+			this.btnBuscar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.btnBuscar.Name = "btnBuscar";
-			this.btnBuscar.Size = new System.Drawing.Size(89, 30);
+			this.btnBuscar.Size = new System.Drawing.Size(119, 37);
 			this.btnBuscar.TabIndex = 10;
 			this.btnBuscar.Text = "🔍 Buscar";
 			this.btnBuscar.UseVisualStyleBackColor = true;
@@ -198,9 +209,10 @@ namespace GUI
 			// 
 			// btnLimpiarFiltros
 			// 
-			this.btnLimpiarFiltros.Location = new System.Drawing.Point(567, 112);
+			this.btnLimpiarFiltros.Location = new System.Drawing.Point(756, 138);
+			this.btnLimpiarFiltros.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.btnLimpiarFiltros.Name = "btnLimpiarFiltros";
-			this.btnLimpiarFiltros.Size = new System.Drawing.Size(89, 23);
+			this.btnLimpiarFiltros.Size = new System.Drawing.Size(119, 28);
 			this.btnLimpiarFiltros.TabIndex = 11;
 			this.btnLimpiarFiltros.Text = "Limpiar filtros";
 			this.btnLimpiarFiltros.UseVisualStyleBackColor = true;
@@ -208,9 +220,10 @@ namespace GUI
 			// 
 			// btnRefrescar
 			// 
-			this.btnRefrescar.Location = new System.Drawing.Point(118, 205);
+			this.btnRefrescar.Location = new System.Drawing.Point(157, 252);
+			this.btnRefrescar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.btnRefrescar.Name = "btnRefrescar";
-			this.btnRefrescar.Size = new System.Drawing.Size(100, 30);
+			this.btnRefrescar.Size = new System.Drawing.Size(133, 37);
 			this.btnRefrescar.TabIndex = 12;
 			this.btnRefrescar.Text = "🔄 Refrescar";
 			this.btnRefrescar.UseVisualStyleBackColor = true;
@@ -222,9 +235,10 @@ namespace GUI
 			this.btnCerrarSesion.BackColor = System.Drawing.Color.Gray;
 			this.btnCerrarSesion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnCerrarSesion.ForeColor = System.Drawing.Color.White;
-			this.btnCerrarSesion.Location = new System.Drawing.Point(1291, 12);
+			this.btnCerrarSesion.Location = new System.Drawing.Point(1774, 15);
+			this.btnCerrarSesion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.btnCerrarSesion.Name = "btnCerrarSesion";
-			this.btnCerrarSesion.Size = new System.Drawing.Size(100, 30);
+			this.btnCerrarSesion.Size = new System.Drawing.Size(133, 37);
 			this.btnCerrarSesion.TabIndex = 13;
 			this.btnCerrarSesion.Text = "🚪 Cerrar sesión";
 			this.btnCerrarSesion.UseVisualStyleBackColor = false;
@@ -233,18 +247,21 @@ namespace GUI
 			// btnReporteStock
 			// 
 			this.btnReporteStock.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnReporteStock.Location = new System.Drawing.Point(1135, 12);
+			this.btnReporteStock.Location = new System.Drawing.Point(1566, 15);
+			this.btnReporteStock.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.btnReporteStock.Name = "btnReporteStock";
-			this.btnReporteStock.Size = new System.Drawing.Size(150, 30);
+			this.btnReporteStock.Size = new System.Drawing.Size(200, 37);
 			this.btnReporteStock.TabIndex = 14;
 			this.btnReporteStock.Text = "📊 Reporte de stock";
 			this.btnReporteStock.UseVisualStyleBackColor = true;
+			this.btnReporteStock.Click += new System.EventHandler(this.btnReporteStock_Click);
 			// 
 			// btnAgregarVendedor
 			// 
-			this.btnAgregarVendedor.Location = new System.Drawing.Point(270, 12);
+			this.btnAgregarVendedor.Location = new System.Drawing.Point(360, 15);
+			this.btnAgregarVendedor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.btnAgregarVendedor.Name = "btnAgregarVendedor";
-			this.btnAgregarVendedor.Size = new System.Drawing.Size(150, 30);
+			this.btnAgregarVendedor.Size = new System.Drawing.Size(200, 37);
 			this.btnAgregarVendedor.TabIndex = 19;
 			this.btnAgregarVendedor.Text = "➕ Vendedores";
 			this.btnAgregarVendedor.UseVisualStyleBackColor = true;
@@ -254,9 +271,10 @@ namespace GUI
 			// 
 			this.lblTotalProductos.AutoSize = true;
 			this.lblTotalProductos.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblTotalProductos.Location = new System.Drawing.Point(359, 62);
+			this.lblTotalProductos.Location = new System.Drawing.Point(479, 76);
+			this.lblTotalProductos.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.lblTotalProductos.Name = "lblTotalProductos";
-			this.lblTotalProductos.Size = new System.Drawing.Size(44, 17);
+			this.lblTotalProductos.Size = new System.Drawing.Size(51, 20);
 			this.lblTotalProductos.TabIndex = 15;
 			this.lblTotalProductos.Text = "Total:";
 			// 
@@ -264,10 +282,10 @@ namespace GUI
 			// 
 			this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.textBox1.Location = new System.Drawing.Point(12, 63);
-			this.textBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBox1.Location = new System.Drawing.Point(16, 78);
+			this.textBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.textBox1.Name = "textBox1";
-			this.textBox1.Size = new System.Drawing.Size(260, 17);
+			this.textBox1.Size = new System.Drawing.Size(347, 21);
 			this.textBox1.TabIndex = 16;
 			this.textBox1.Text = "Ingrese la informacion del producto:";
 			// 
@@ -275,9 +293,10 @@ namespace GUI
 			// 
 			this.lblTitulo.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold);
 			this.lblTitulo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(134)))), ((int)(((byte)(193)))));
-			this.lblTitulo.Location = new System.Drawing.Point(6, 7);
+			this.lblTitulo.Location = new System.Drawing.Point(8, 9);
+			this.lblTitulo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.lblTitulo.Name = "lblTitulo";
-			this.lblTitulo.Size = new System.Drawing.Size(223, 40);
+			this.lblTitulo.Size = new System.Drawing.Size(297, 49);
 			this.lblTitulo.TabIndex = 17;
 			this.lblTitulo.Text = "SUPERCASH";
 			this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -286,9 +305,10 @@ namespace GUI
 			// 
 			this.pbLogo.Image = ((System.Drawing.Image)(resources.GetObject("pbLogo.Image")));
 			this.pbLogo.ImageLocation = "";
-			this.pbLogo.Location = new System.Drawing.Point(224, 7);
+			this.pbLogo.Location = new System.Drawing.Point(299, 9);
+			this.pbLogo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.pbLogo.Name = "pbLogo";
-			this.pbLogo.Size = new System.Drawing.Size(38, 40);
+			this.pbLogo.Size = new System.Drawing.Size(51, 49);
 			this.pbLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
 			this.pbLogo.TabIndex = 18;
 			this.pbLogo.TabStop = false;
@@ -298,15 +318,17 @@ namespace GUI
 			this.dtpFechaInicio.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.dtpFechaInicio.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-			this.dtpFechaInicio.Location = new System.Drawing.Point(1309, 48);
-			this.dtpFechaInicio.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.dtpFechaInicio.Location = new System.Drawing.Point(1798, 59);
+			this.dtpFechaInicio.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.dtpFechaInicio.Name = "dtpFechaInicio";
-			this.dtpFechaInicio.Size = new System.Drawing.Size(84, 20);
+			this.dtpFechaInicio.Size = new System.Drawing.Size(111, 22);
 			this.dtpFechaInicio.TabIndex = 20;
 			// 
 			// chartVentas
 			// 
-			this.chartVentas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.chartVentas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.chartVentas.BackColor = System.Drawing.Color.DarkGray;
 			this.chartVentas.BorderlineColor = System.Drawing.Color.Black;
 			this.chartVentas.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
@@ -314,23 +336,24 @@ namespace GUI
 			this.chartVentas.ChartAreas.Add(chartArea1);
 			legend1.Name = "Legend1";
 			this.chartVentas.Legends.Add(legend1);
-			this.chartVentas.Location = new System.Drawing.Point(589, 264);
+			this.chartVentas.Location = new System.Drawing.Point(783, 337);
+			this.chartVentas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.chartVentas.Name = "chartVentas";
 			this.chartVentas.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel;
 			series1.ChartArea = "ChartArea1";
 			series1.Legend = "Legend1";
 			series1.Name = "Series1";
 			this.chartVentas.Series.Add(series1);
-			this.chartVentas.Size = new System.Drawing.Size(561, 509);
+			this.chartVentas.Size = new System.Drawing.Size(1034, 650);
 			this.chartVentas.TabIndex = 21;
 			this.chartVentas.Text = "chart1";
 			this.chartVentas.Click += new System.EventHandler(this.chart1_Click);
 			// 
 			// frmAdmin
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1403, 783);
+			this.ClientSize = new System.Drawing.Size(1924, 1000);
 			this.Controls.Add(this.chartVentas);
 			this.Controls.Add(this.pbLogo);
 			this.Controls.Add(this.lblTitulo);
@@ -353,6 +376,7 @@ namespace GUI
 			this.Controls.Add(this.txtBuscar);
 			this.Controls.Add(this.txtNombre);
 			this.Controls.Add(this.dgvProductos);
+			this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.Name = "frmAdmin";
 			this.Text = "Panel Administrador - SuperCash";
 			this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

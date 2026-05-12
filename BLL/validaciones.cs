@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Text.RegularExpressions;
 using DAL;
+using EL;
 
 namespace BLL
 {
@@ -131,9 +133,9 @@ namespace BLL
             return proDAL.ObtenerVentasPorMes();
         }
 
-		public bool ProcesarVenta(int id, int cant, double tot)
+		public bool ProcesarVentaCompleta(int idUsuario, decimal total, List<ItemVenta> carrito)
 		{
-			return proDAL.RegistrarVentaConStock(id, cant, tot);
+			return proDAL.RegistrarVentaCompleta(idUsuario, total, carrito);
 		}
 	}
 }

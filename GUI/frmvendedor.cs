@@ -133,27 +133,27 @@ namespace GUI
 
 			if (confirmacion == DialogResult.Yes)
 			{
-				bool todoOk = true;
+				decimal totalFinal = carrito.Sum(i => i.Subtotal);
 
-				foreach (var item in carrito)
-				{
-					bool rpta = objBLL.ProcesarVenta(item.ProductoId, item.Cantidad, (double)item.Subtotal);
+				int idVendedor = EL.Sesion.UsuarioActual != null ? EL.Sesion.UsuarioActual.ID_Usuario : 1;
 
-					if (!rpta) todoOk = false;
-				}
+				List<ItemVenta> listaCarrito = carrito.ToList();
 
-				if (todoOk)
+				bool ventaExitosa = objBLL.ProcesarVentaCompleta(idVendedor, totalFinal, listaCarrito);
+
+				if (ventaExitosa)
 				{
 					MessageBox.Show("¡Venta exitosa! Stock actualizado.");
 					string mensajeTicket = GenerarTicket();
 					MessageBox.Show(mensajeTicket, "Ticket de Venta", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
 					carrito.Clear();
-					ActualizarCarrito();
+					ActualizarCarrito(); // O ActualizarCarrito si solo tienes ese método para los totales
 					CargarProductos();
 				}
 				else
 				{
-					MessageBox.Show("Error al procesar la venta. Revisa la conexión o los nombres de las columnas.");
+					MessageBox.Show("Hubo un error al procesar la venta.");
 				}
 			}
 		}
@@ -240,14 +240,5 @@ namespace GUI
 			if (nudCantidad.Value < 1)
 				nudCantidad.Value = 1;
 		}
-	}
-
-	public class ItemVenta
-	{
-		public int ProductoId { get; set; }
-		public string NombreProducto { get; set; }
-		public int Cantidad { get; set; }
-		public decimal PrecioUnitario { get; set; }
-		public decimal Subtotal { get; set; }
 	}
 }
