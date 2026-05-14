@@ -184,7 +184,7 @@ namespace DAL
                          WHERE P.Stock <= @alerta";
 
 				SqlCommand cmd = new SqlCommand(query, con);
-				cmd.Parameters.AddWithValue("@alerta", 5); // umbral de alerta fijo
+				cmd.Parameters.AddWithValue("@alerta", 5);
 				SqlDataAdapter da = new SqlDataAdapter(cmd);
 				da.Fill(dt);
 			}

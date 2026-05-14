@@ -191,6 +191,8 @@ namespace GUI
 			txtUsuario.Text = "";
 			txtContrasena.Text = "";
 			txtUsuario.Focus();
+			txtContrasena.UseSystemPasswordChar = true;
+			chkMostrarContrasena.Checked = false;
 		}
 	}
 }

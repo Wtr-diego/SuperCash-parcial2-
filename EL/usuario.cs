@@ -6,7 +6,6 @@
         public string Nombres { get; set; }
         public string Apellidos { get; set; }
         public string NombreUsuario { get; set; }
-        // Mail removed: project no longer stores email on Usuario
         public string Contrasena { get; set; }
         public string Rol { get; set; }
 		public int ID_Rol { get; set; }

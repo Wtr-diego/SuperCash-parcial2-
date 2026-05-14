@@ -82,7 +82,7 @@ namespace GUI
             | System.Windows.Forms.AnchorStyles.Left)));
 			this.dgvProductos.ColumnHeadersHeight = 29;
 			this.dgvProductos.Location = new System.Drawing.Point(11, 337);
-			this.dgvProductos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.dgvProductos.Margin = new System.Windows.Forms.Padding(4);
 			this.dgvProductos.Name = "dgvProductos";
 			this.dgvProductos.ReadOnly = true;
 			this.dgvProductos.RowHeadersWidth = 51;
@@ -96,7 +96,7 @@ namespace GUI
 			// txtNombre
 			// 
 			this.txtNombre.Location = new System.Drawing.Point(16, 116);
-			this.txtNombre.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.txtNombre.Margin = new System.Windows.Forms.Padding(4);
 			this.txtNombre.Name = "txtNombre";
 			this.txtNombre.Size = new System.Drawing.Size(265, 22);
 			this.txtNombre.TabIndex = 1;
@@ -104,7 +104,7 @@ namespace GUI
 			// txtBuscar
 			// 
 			this.txtBuscar.Location = new System.Drawing.Point(483, 100);
-			this.txtBuscar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.txtBuscar.Margin = new System.Windows.Forms.Padding(4);
 			this.txtBuscar.Name = "txtBuscar";
 			this.txtBuscar.Size = new System.Drawing.Size(265, 22);
 			this.txtBuscar.TabIndex = 2;
@@ -114,7 +114,7 @@ namespace GUI
 			// 
 			this.cmbCategoria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cmbCategoria.Location = new System.Drawing.Point(16, 146);
-			this.cmbCategoria.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.cmbCategoria.Margin = new System.Windows.Forms.Padding(4);
 			this.cmbCategoria.Name = "cmbCategoria";
 			this.cmbCategoria.Size = new System.Drawing.Size(265, 24);
 			this.cmbCategoria.TabIndex = 3;
@@ -123,7 +123,7 @@ namespace GUI
 			// 
 			this.cmbFiltroCategoria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cmbFiltroCategoria.Location = new System.Drawing.Point(483, 138);
-			this.cmbFiltroCategoria.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.cmbFiltroCategoria.Margin = new System.Windows.Forms.Padding(4);
 			this.cmbFiltroCategoria.Name = "cmbFiltroCategoria";
 			this.cmbFiltroCategoria.Size = new System.Drawing.Size(265, 24);
 			this.cmbFiltroCategoria.TabIndex = 4;
@@ -133,7 +133,7 @@ namespace GUI
 			// 
 			this.nudPrecio.DecimalPlaces = 2;
 			this.nudPrecio.Location = new System.Drawing.Point(16, 178);
-			this.nudPrecio.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.nudPrecio.Margin = new System.Windows.Forms.Padding(4);
 			this.nudPrecio.Maximum = new decimal(new int[] {
             1000000,
             0,
@@ -147,7 +147,7 @@ namespace GUI
 			// nudStock
 			// 
 			this.nudStock.Location = new System.Drawing.Point(16, 210);
-			this.nudStock.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.nudStock.Margin = new System.Windows.Forms.Padding(4);
 			this.nudStock.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -162,7 +162,7 @@ namespace GUI
 			this.btnGuardar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(204)))), ((int)(((byte)(113)))));
 			this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnGuardar.Location = new System.Drawing.Point(313, 116);
-			this.btnGuardar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.btnGuardar.Margin = new System.Windows.Forms.Padding(4);
 			this.btnGuardar.Name = "btnGuardar";
 			this.btnGuardar.Size = new System.Drawing.Size(133, 37);
 			this.btnGuardar.TabIndex = 7;
@@ -175,7 +175,7 @@ namespace GUI
 			this.btnNuevo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
 			this.btnNuevo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnNuevo.Location = new System.Drawing.Point(313, 178);
-			this.btnNuevo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.btnNuevo.Margin = new System.Windows.Forms.Padding(4);
 			this.btnNuevo.Name = "btnNuevo";
 			this.btnNuevo.Size = new System.Drawing.Size(133, 37);
 			this.btnNuevo.TabIndex = 8;
@@ -188,7 +188,7 @@ namespace GUI
 			this.btnEliminar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
 			this.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnEliminar.Location = new System.Drawing.Point(16, 252);
-			this.btnEliminar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.btnEliminar.Margin = new System.Windows.Forms.Padding(4);
 			this.btnEliminar.Name = "btnEliminar";
 			this.btnEliminar.Size = new System.Drawing.Size(133, 37);
 			this.btnEliminar.TabIndex = 9;
@@ -199,7 +199,7 @@ namespace GUI
 			// btnBuscar
 			// 
 			this.btnBuscar.Location = new System.Drawing.Point(756, 94);
-			this.btnBuscar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.btnBuscar.Margin = new System.Windows.Forms.Padding(4);
 			this.btnBuscar.Name = "btnBuscar";
 			this.btnBuscar.Size = new System.Drawing.Size(119, 37);
 			this.btnBuscar.TabIndex = 10;
@@ -210,7 +210,7 @@ namespace GUI
 			// btnLimpiarFiltros
 			// 
 			this.btnLimpiarFiltros.Location = new System.Drawing.Point(756, 138);
-			this.btnLimpiarFiltros.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.btnLimpiarFiltros.Margin = new System.Windows.Forms.Padding(4);
 			this.btnLimpiarFiltros.Name = "btnLimpiarFiltros";
 			this.btnLimpiarFiltros.Size = new System.Drawing.Size(119, 28);
 			this.btnLimpiarFiltros.TabIndex = 11;
@@ -221,7 +221,7 @@ namespace GUI
 			// btnRefrescar
 			// 
 			this.btnRefrescar.Location = new System.Drawing.Point(157, 252);
-			this.btnRefrescar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.btnRefrescar.Margin = new System.Windows.Forms.Padding(4);
 			this.btnRefrescar.Name = "btnRefrescar";
 			this.btnRefrescar.Size = new System.Drawing.Size(133, 37);
 			this.btnRefrescar.TabIndex = 12;
@@ -236,7 +236,7 @@ namespace GUI
 			this.btnCerrarSesion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnCerrarSesion.ForeColor = System.Drawing.Color.White;
 			this.btnCerrarSesion.Location = new System.Drawing.Point(1774, 15);
-			this.btnCerrarSesion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.btnCerrarSesion.Margin = new System.Windows.Forms.Padding(4);
 			this.btnCerrarSesion.Name = "btnCerrarSesion";
 			this.btnCerrarSesion.Size = new System.Drawing.Size(133, 37);
 			this.btnCerrarSesion.TabIndex = 13;
@@ -248,7 +248,7 @@ namespace GUI
 			// 
 			this.btnReporteStock.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnReporteStock.Location = new System.Drawing.Point(1566, 15);
-			this.btnReporteStock.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.btnReporteStock.Margin = new System.Windows.Forms.Padding(4);
 			this.btnReporteStock.Name = "btnReporteStock";
 			this.btnReporteStock.Size = new System.Drawing.Size(200, 37);
 			this.btnReporteStock.TabIndex = 14;
@@ -259,7 +259,7 @@ namespace GUI
 			// btnAgregarVendedor
 			// 
 			this.btnAgregarVendedor.Location = new System.Drawing.Point(360, 15);
-			this.btnAgregarVendedor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.btnAgregarVendedor.Margin = new System.Windows.Forms.Padding(4);
 			this.btnAgregarVendedor.Name = "btnAgregarVendedor";
 			this.btnAgregarVendedor.Size = new System.Drawing.Size(200, 37);
 			this.btnAgregarVendedor.TabIndex = 19;
@@ -306,7 +306,7 @@ namespace GUI
 			this.pbLogo.Image = ((System.Drawing.Image)(resources.GetObject("pbLogo.Image")));
 			this.pbLogo.ImageLocation = "";
 			this.pbLogo.Location = new System.Drawing.Point(299, 9);
-			this.pbLogo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.pbLogo.Margin = new System.Windows.Forms.Padding(4);
 			this.pbLogo.Name = "pbLogo";
 			this.pbLogo.Size = new System.Drawing.Size(51, 49);
 			this.pbLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -337,7 +337,7 @@ namespace GUI
 			legend1.Name = "Legend1";
 			this.chartVentas.Legends.Add(legend1);
 			this.chartVentas.Location = new System.Drawing.Point(783, 337);
-			this.chartVentas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.chartVentas.Margin = new System.Windows.Forms.Padding(4);
 			this.chartVentas.Name = "chartVentas";
 			this.chartVentas.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel;
 			series1.ChartArea = "ChartArea1";
@@ -376,7 +376,7 @@ namespace GUI
 			this.Controls.Add(this.txtBuscar);
 			this.Controls.Add(this.txtNombre);
 			this.Controls.Add(this.dgvProductos);
-			this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.Margin = new System.Windows.Forms.Padding(4);
 			this.Name = "frmAdmin";
 			this.Text = "Panel Administrador - SuperCash";
 			this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

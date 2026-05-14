@@ -15,7 +15,7 @@ namespace GUI
 	{
 		// Instancia de la capa de datos
 		private ProductoDAL proDAL = new ProductoDAL();
-		private int idProductoSeleccionado = 0; // Usaremos el ID directamente
+		private int idProductoSeleccionado = 0;
 		Validaciones objBLL = new Validaciones();
 		VentaDAL objVentaDAL = new VentaDAL();
 
@@ -28,7 +28,6 @@ namespace GUI
 			CargarGraficoMasVendidos();
 		}
 
-		// Nuevo: abrir formulario para agregar vendedores
 		private void btnAgregarVendedor_Click(object sender, EventArgs e)
 		{
 			// Abrir una nueva pestaña (form) para agregar vendedores
@@ -36,7 +35,6 @@ namespace GUI
 			{
 				frm.StartPosition = FormStartPosition.CenterParent;
 				frm.ShowDialog(this);
-				// Después de cerrar, podríamos refrescar lista de vendedores si existiera
 			}
 		}
 		private void LimpiarTextboxes(Control.ControlCollection controles)
@@ -81,7 +79,7 @@ namespace GUI
 					{
 						int stock = Convert.ToInt32(row.Cells["Stock"].Value);
 						if (stock < 10) row.DefaultCellStyle.BackColor = Color.LightCoral;
-						else if (stock < 20) row.DefaultCellStyle.BackColor = Color.LemonChiffon;
+						else if (stock < 15) row.DefaultCellStyle.BackColor = Color.LemonChiffon;
 						else row.DefaultCellStyle.BackColor = Color.White;
 					}
 				}
@@ -97,7 +95,7 @@ namespace GUI
 		private void CargarCategoria()
 		{
 
-			string[] cats = { "Granos", "Lácteos", "Panadería", "Bebidas", "Limpieza", "Carnes", "Verduras" };
+			string[] cats = { "Granos", "Lácteos", "Panadería", "Bebidas", "Limpieza", "Carnes", "Verduras", "Farmacia", "Salud y Cuidado Personal", "Primeros Auxilios","Despensa", "Snacks y Extras"};
 
 			cmbCategoria.Items.Clear();
 			cmbCategoria.Items.AddRange(cats);
@@ -135,7 +133,7 @@ namespace GUI
 				// Validar duplicados
 				if (idProductoSeleccionado == 0)
 				{
-					if (proDAL.ExisteProducto(nombre)) // Asegúrate de tener este método en ProductoDAL
+					if (proDAL.ExisteProducto(nombre))
 					{
 						MessageBox.Show("Ya existe un producto con ese nombre. Evite duplicados.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 						return;
@@ -457,5 +455,6 @@ namespace GUI
 		{
 
 		}
+
 	}
 }

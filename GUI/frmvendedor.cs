@@ -33,7 +33,6 @@ namespace GUI
 			this.StartPosition = FormStartPosition.CenterScreen;
 			this.BackColor = Color.White;
 
-			// Uso de la nueva clase Sesion que creamos
 			if (EL.Sesion.UsuarioActual != null)
 			{
 				lblVendedor.Text = $"Vendedor: {EL.Sesion.UsuarioActual.Nombres} {EL.Sesion.UsuarioActual.Apellidos}";
@@ -48,10 +47,8 @@ namespace GUI
 		{
 			try
 			{
-				// Obtenemos los datos reales de SQL Server
 				DataTable dt = proDAL.ObtenerTodos();
 
-				// Si hay filtro, lo aplicamos al DataTable
 				if (!string.IsNullOrWhiteSpace(filtro))
 				{
 					dt.DefaultView.RowFilter = $"Nombre LIKE '%{filtro}%'";
@@ -59,7 +56,6 @@ namespace GUI
 
 				dgvProductos.DataSource = dt;
 
-				// Configuración de columnas (Asegúrate que los nombres coincidan con tu SQL)
 				if (dgvProductos.Columns.Count > 0)
 				{
 					dgvProductos.Columns["ID_Producto"].HeaderText = "ID";
@@ -89,7 +85,6 @@ namespace GUI
 				return;
 			}
 
-			// Obtenemos datos de la fila seleccionada del DataTable
 			int id = Convert.ToInt32(dgvProductos.CurrentRow.Cells["ID_Producto"].Value);
 			string nombre = dgvProductos.CurrentRow.Cells["Nombre"].Value.ToString();
 			decimal precio = Convert.ToDecimal(dgvProductos.CurrentRow.Cells["Precio"].Value);
@@ -148,7 +143,7 @@ namespace GUI
 					MessageBox.Show(mensajeTicket, "Ticket de Venta", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 					carrito.Clear();
-					ActualizarCarrito(); // O ActualizarCarrito si solo tienes ese método para los totales
+					ActualizarCarrito();
 					CargarProductos();
 				}
 				else
@@ -180,25 +175,24 @@ namespace GUI
 
 		private void btnCerrarSesion_Click(object sender, EventArgs e)
 		{
-         // Preguntar confirmación antes de cerrar sesión
 			var resp = MessageBox.Show("¿Está seguro que desea cerrar sesión?", "Confirmar cierre de sesión", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 			if (resp != DialogResult.Yes)
 			{
 				return;
 			}
 
-			// Limpiar sesión y volver al formulario de login en lugar de cerrar la aplicación
 			EL.Sesion.UsuarioActual = null;
-			// Mostrar la ventana de login existente si está abierta, si no crear una nueva
 			var existingLogin = Application.OpenForms.OfType<frmLogin>().FirstOrDefault();
 			if (existingLogin != null)
 			{
 				existingLogin.Show();
 				existingLogin.BringToFront();
+				existingLogin.LimpiarCampos();
 			}
 			else
 			{
 				new frmLogin().Show();
+				new frmLogin().LimpiarCampos();
 			}
 			this.Close();
 		}
@@ -224,7 +218,6 @@ namespace GUI
 			}
 			catch (Exception ex)
 			{
-				// ¡Si algo falla, no se cierra! Te muestra esta ventana con la pista final:
 				MessageBox.Show("El error exacto ocurre en:\n\n" + ex.StackTrace, "Atrapado!");
 			}
 		}
